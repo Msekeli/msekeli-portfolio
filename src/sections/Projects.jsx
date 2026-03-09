@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
 import Text from "../components/Text";
@@ -7,83 +8,131 @@ import Icon from "../components/Icon";
 import projects from "../data/projects.json";
 
 export default function Projects() {
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState("next");
+
+  const total = projects.length;
+  const visible = projects.slice(index, index + 2);
+
+  const next = () => {
+    if (index + 2 < total) {
+      setDirection("next");
+      setIndex(index + 2);
+    }
+  };
+
+  const prev = () => {
+    if (index - 2 >= 0) {
+      setDirection("prev");
+      setIndex(index - 2);
+    }
+  };
+
   return (
     <Section id="projects">
-      <SectionTitle>Projects</SectionTitle>
+      <div className="flex flex-col h-[75vh]">
+        {/* Controller */}
+        <div className="flex items-center justify-between mb-1">
+          <SectionTitle>Projects</SectionTitle>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <Surface
-            key={project.title}
-            className="
-              group
-              transition-all
-              hover:gold-glow
-              hover:border hover:border-gold-main/30
-            "
+          <span className="text-sm text-text-secondary">
+            {index + 1}-{Math.min(index + 2, total)} of {total}
+          </span>
+        </div>
+
+        <div className="flex justify-between mb-3">
+          <button
+            onClick={prev}
+            disabled={index === 0}
+            className="text-sm text-text-secondary hover:text-gold-main disabled:opacity-30"
           >
-            <div className="space-y-4">
+            ← Previous
+          </button>
+
+          <button
+            onClick={next}
+            disabled={index + 2 >= total}
+            className="text-sm text-text-secondary hover:text-gold-main disabled:opacity-30"
+          >
+            Next →
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div className="border-b border-borderColor mb-4"></div>
+
+        {/* Animated Project Grid */}
+        <div
+          key={index}
+          className={`
+            grid grid-cols-1 md:grid-cols-2 gap-6 flex-1
+            ${direction === "next" ? "animate-slide-left" : "animate-slide-right"}
+          `}
+        >
+          {visible.map((project) => (
+            <Surface key={project.title} className="group hover:gold-glow">
               {/* Image */}
-              <div className="relative overflow-hidden rounded-lg">
+              <div className="h-27.5 overflow-hidden rounded-lg">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="
-                    w-full aspect-16/10 object-cover
-                    transition-transform duration-300
-                    group-hover:scale-105
-                  "
+                  className="w-full h-full object-cover group-hover:scale-105 transition"
                 />
               </div>
 
-              {/* Text */}
-              <div className="space-y-2">
-                <h3 className="text-base font-medium text-text-primary">
+              <div className="mt-3 space-y-2">
+                {/* Title */}
+                <h3 className="text-sm font-medium text-text-primary">
                   {project.title}
                 </h3>
 
+                {/* Description */}
                 <Text variant="secondary" className="text-sm leading-relaxed">
                   {project.description}
                 </Text>
-              </div>
 
-              {/* Tech stack */}
-              <div className="flex flex-wrap gap-2 pt-1">
-                {project.tech.map((item) => (
-                  <span
-                    key={item}
-                    className="
-                      px-2.5 py-1
-                      text-xs
-                      rounded-md
-                      border border-gold-main/30
-                      text-gold-soft
-                    "
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+                {/* Tech */}
+                <div className="flex flex-wrap gap-1">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-0.5 border border-gold-main/30 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-              {/* Actions */}
-              <div className="flex gap-3 pt-3">
-                <Button variant="primary">
-                  <span className="flex items-center gap-2">
-                    <Icon name="ExternalLink" />
-                    Live Demo
-                  </span>
-                </Button>
+                {/* Buttons */}
+                <div className="flex gap-2 pt-2">
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="primary">
+                        <Icon name="ExternalLink" />
+                      </Button>
+                    </a>
+                  )}
 
-                <Button variant="secondary">
-                  <span className="flex items-center gap-2">
-                    <Icon name="Github" />
-                    Source Code
-                  </span>
-                </Button>
+                  {project.repo && (
+                    <a
+                      href={project.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="secondary">
+                        <Icon name="Github" />
+                      </Button>
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          </Surface>
-        ))}
+            </Surface>
+          ))}
+        </div>
       </div>
     </Section>
   );

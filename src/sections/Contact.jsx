@@ -97,13 +97,12 @@ export default function Contact() {
         <Surface className="overflow-hidden">
           <iframe
             title="Location"
-            src="https://www.google.com/maps?q=Salt+River,+Cape+Town,+7925&output=embed"
+            src="https://www.google.com/maps?q=Salt+River,+Cape+Town,+7925&z=14&output=embed"
             className="w-full h-full min-h-80 border-0"
             style={{
               filter:
                 "invert(90%) hue-rotate(210deg) brightness(85%) contrast(110%)",
             }}
-            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
         </Surface>

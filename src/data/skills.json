@@ -1,0 +1,31 @@
+{
+  "frontend": [
+    "React.js",
+    "Blazor",
+    "TypeScript",
+    "JavaScript",
+    "Tailwind CSS",
+    "Bootstrap",
+    "HTML5 / CSS3"
+  ],
+  "backend": [
+    "C#",
+    "ASP.NET Core",
+    ".NET 6 – 10",
+    "Entity Framework Core",
+    "REST APIs",
+    "SQL Server",
+    "PostgreSQL",
+    "SQLite"
+  ],
+  "cloud": [
+    "Azure",
+    "Azure Static Web Apps",
+    "Azure Functions",
+    "AWS",
+    "Azure DevOps",
+    "Git / GitHub",
+    "Postman",
+    "Visual Studio"
+  ]
+}
