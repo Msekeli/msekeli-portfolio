@@ -7,10 +7,13 @@ import Button from "../components/Button";
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
+  const [message, setMessage] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     setStatus("sending");
+    setMessage("");
 
     const form = e.target;
 
@@ -18,6 +21,7 @@ export default function Contact() {
       name: form.name.value,
       email: form.email.value,
       message: form.message.value,
+      company: form.company?.value || "",
     };
 
     try {
@@ -32,18 +36,23 @@ export default function Contact() {
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        throw new Error("Failed request");
+        throw new Error(data.message || "Something went wrong.");
       }
 
       form.reset();
+
       setStatus("success");
+      setMessage(data.message || "Message sent successfully.");
 
       setTimeout(() => {
         setStatus("idle");
-      }, 4000);
+        setMessage("");
+      }, 5000);
     } catch (error) {
       console.error(error);
+
       setStatus("error");
+      setMessage(error.message || "Something went wrong. Please try again.");
     }
   }
 
@@ -61,6 +70,15 @@ export default function Contact() {
             </Text>
 
             <form className="space-y-4" onSubmit={handleSubmit}>
+              {/* Honeypot spam trap */}
+              <input
+                type="text"
+                name="company"
+                style={{ display: "none" }}
+                tabIndex="-1"
+                autoComplete="off"
+              />
+
               <input
                 name="name"
                 type="text"
@@ -90,15 +108,11 @@ export default function Contact() {
               </Button>
 
               {status === "success" && (
-                <p className="text-sm text-green-400">
-                  Message sent successfully. Thank you!
-                </p>
+                <p className="text-sm text-green-400">{message}</p>
               )}
 
               {status === "error" && (
-                <p className="text-sm text-red-400">
-                  Something went wrong. Please try again.
-                </p>
+                <p className="text-sm text-red-400">{message}</p>
               )}
             </form>
           </div>
