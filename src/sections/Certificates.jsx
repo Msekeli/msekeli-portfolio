@@ -20,8 +20,6 @@ export default function Certificates() {
   return (
     <Section id="certificates">
       <SectionTitle>Skills</SectionTitle>
-
-      {/* Blur only section content when modal is open */}
       <div
         className={
           activeCert ? "blur-sm pointer-events-none transition" : "transition"

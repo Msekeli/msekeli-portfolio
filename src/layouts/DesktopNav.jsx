@@ -46,8 +46,6 @@ export default function DesktopNav() {
               >
                 <Icon name={icon} />
               </div>
-
-              {/* UPDATED LABEL STYLING */}
               <span
                 className="
                   absolute left-14 top-1/2 -translate-y-1/2
