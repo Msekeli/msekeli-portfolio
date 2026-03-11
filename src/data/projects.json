@@ -1,27 +1,32 @@
 [
   {
-    "title": "Portfolio Website",
-    "description": "A modern, responsive portfolio built with React and Tailwind CSS.",
-    "tech": ["React", "Vite", "Tailwind"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "Inventory Ledger",
+    "description": "Inventory system for managing products, tracking stock movements, monitoring inventory levels, and identifying low-stock items.",
+    "tech": [
+      "Blazor WebAssembly",
+      "ASP.NET Core Web API",
+      "Entity Framework Core",
+      "SQLite"
+    ],
+    "demo": "https://github.com/Msekeli/InventoryLedger.git",
+    "repo": "https://github.com/Msekeli/InventoryLedger.git",
+    "image": "/images/inventory.webp"
   },
   {
-    "title": "Savings Application",
-    "description": "A cloud-hosted savings tracker with secure authentication.",
-    "tech": ["C#", ".NET", "Azure"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "Authentication Login System",
+    "description": "A full-stack authentication system that allows users to register, log in, and securely access their profile through protected routes.",
+    "tech": ["React", "ASP.NET Core Web API", "PostgreSQL", "Docker"],
+    "demo": "https://github.com/Msekeli/LoginSystem.git",
+    "repo": "https://github.com/Msekeli/LoginSystem.git",
+    "image": "/images/login.webp"
   },
   {
-    "title": "Reward Chest App",
-    "description": "Interactive reward system with animated user feedback.",
-    "tech": ["JavaScript", "HTML", "CSS"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "SmartWheel",
+    "description": "A full-stack reward wheel application where users answer riddles and spin a wheel to win prizes determined entirely by the backend.",
+    "tech": ["React", "Vite", "ASP.NET Core Minimal API", "SQLite", "Azure"],
+    "demo": "https://smartwheel-api-msekeli-g0g3e5gvetb5fwdt.southafricanorth-01.azurewebsites.net/sagger",
+    "repo": "https://github.com/Msekeli/SmartWheel2",
+    "image": "/images/smartwheel.webp"
   },
   {
     "title": "Task Manager",
