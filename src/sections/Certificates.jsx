@@ -20,14 +20,22 @@ export default function Certificates() {
   return (
     <Section id="certificates">
       <SectionTitle>Skills</SectionTitle>
+
       <div
         className={
           activeCert ? "blur-sm pointer-events-none transition" : "transition"
         }
       >
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto mb-6">
-          <Surface className="gold-glow p-4">
+        <div
+          className="
+            grid grid-cols-1 md:grid-cols-3
+            gap-5
+            max-w-6xl mx-auto
+            mb-15"
+        >
+          <Surface className="gold-glow p-10">
+            {" "}
             <h3 className="text-base font-semibold mb-2">Frontend</h3>
             <div className="flex flex-wrap gap-2">
               {skills.frontend.map((skill) => (
@@ -41,7 +49,8 @@ export default function Certificates() {
             </div>
           </Surface>
 
-          <Surface className="gold-glow p-4">
+          <Surface className="gold-glow p-10">
+            {" "}
             <h3 className="text-base font-semibold mb-2">Backend & Data</h3>
             <div className="flex flex-wrap gap-2">
               {skills.backend.map((skill) => (
@@ -55,7 +64,8 @@ export default function Certificates() {
             </div>
           </Surface>
 
-          <Surface className="gold-glow p-4">
+          <Surface className="gold-glow p-10">
+            {" "}
             <h3 className="text-base font-semibold mb-2">Cloud & Tools</h3>
             <div className="flex flex-wrap gap-2">
               {skills.cloud.map((skill) => (
@@ -94,7 +104,7 @@ export default function Certificates() {
 
             <button
               onClick={() => setActiveCert(null)}
-              className="absolute -top-5  right-0 text-white/70 hover:text-yellow-400 transition"
+              className="absolute -top-5 right-0 text-white/70 hover:text-yellow-400 transition"
             >
               Close ✕
             </button>

@@ -62,8 +62,8 @@ export default function Contact() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* LEFT: Contact form */}
-        <Surface>
-          <div className="space-y-6">
+        <Surface className="gold-glow">
+          <div className="space-y-6 ">
             <Text variant="secondary">
               If you’d like to get in touch, send a message and I’ll respond as
               soon as possible.
@@ -119,7 +119,7 @@ export default function Contact() {
         </Surface>
 
         {/* RIGHT: Map */}
-        <Surface className="overflow-hidden">
+        <Surface className="overflow-hidden gold-glow">
           <iframe
             title="Location"
             src="https://www.google.com/maps?q=Salt+River,+Cape+Town,+7925&z=14&output=embed"

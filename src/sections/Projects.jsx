@@ -92,7 +92,7 @@ export default function Projects() {
             <Surface
               key={project.title}
               elevated
-              className="group flex flex-col hover:gold-glow transition"
+              className="group flex flex-col gold-glow transition"
             >
               {/* Image */}
               <div className="aspect-video overflow-hidden rounded-lg">
@@ -130,7 +130,7 @@ export default function Projects() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex gap-2 pt-2 mt-auto">
+                <div className="flex flex-wrap gap-2 pt-2 mt-auto">
                   {project.demo && (
                     <a
                       href={project.demo}
