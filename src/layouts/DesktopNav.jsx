@@ -23,7 +23,7 @@ export default function DesktopNav() {
   };
 
   return (
-    <aside className="hidden md:flex w-24">
+    <aside className="hidden md:flex w-24 relative z-50">
       <div className="mt-24 ml-15 surface rounded-2xl p-3 flex flex-col gap-4 gold-glow max-h-105 justify-center">
         {items.map(({ id, label, icon }) => {
           const isActive = activeId === id;

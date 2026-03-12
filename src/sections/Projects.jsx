@@ -103,11 +103,23 @@ export default function Projects() {
                 />
               </div>
 
-              <div className="mt-3 space-y-2 flex flex-col grow">
+              <div className="mt-3 space-y-3 flex flex-col grow">
                 {/* Title */}
                 <h3 className="text-sm font-medium text-text-primary">
                   {project.title}
                 </h3>
+
+                {/* Tech */}
+                <div className="flex flex-wrap gap-1">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 border border-gold-main/30 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
                 {/* Description */}
                 <Text
@@ -116,18 +128,6 @@ export default function Projects() {
                 >
                   {project.description}
                 </Text>
-
-                {/* Tech */}
-                <div className="flex flex-wrap gap-1">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-0.5 border border-gold-main/30 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
 
                 {/* Buttons */}
                 <div className="flex flex-wrap gap-2 pt-2 mt-auto">
