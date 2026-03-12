@@ -5,6 +5,10 @@
 @import "./styles/base.css";
 @import "./styles/components.css";
 
+@import "./styles/animations/fade.css";
+@import "./styles/animations/slide.css";
+@import "./styles/animations/scale.css";
+
 /* Tailwind v4 theme mapping */
 @theme {
   --color-bg-primary: var(--bg-primary);

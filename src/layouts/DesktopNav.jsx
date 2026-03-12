@@ -4,7 +4,7 @@ import useActiveSection from "../hooks/useActiveSection";
 const items = [
   { id: "home", label: "Home", icon: "Home" },
   { id: "about", label: "About", icon: "User" },
-  { id: "certificates", label: "Certificates", icon: "Award" },
+  { id: "certificates", label: "Skills", icon: "Code2" },
   { id: "projects", label: "Projects", icon: "FolderGit2" },
   { id: "contact", label: "Contact", icon: "Mail" },
 ];
@@ -16,12 +16,14 @@ export default function DesktopNav() {
     const el = document.getElementById(id);
     if (!el) return;
 
-    el.scrollIntoView({ behavior: "smooth" });
+    // instant navigation (feels much faster)
+    el.scrollIntoView({ behavior: "auto", block: "start" });
+
     history.replaceState(null, "", location.pathname);
   };
 
   return (
-    <aside className="hidden md:flex w-24">
+    <aside className="hidden md:flex w-24 relative z-50">
       <div className="mt-24 ml-15 surface rounded-2xl p-3 flex flex-col gap-4 gold-glow max-h-105 justify-center">
         {items.map(({ id, label, icon }) => {
           const isActive = activeId === id;
@@ -30,13 +32,23 @@ export default function DesktopNav() {
             <button
               key={id}
               onClick={() => handleClick(id)}
-              className="group relative flex justify-center"
+              className="
+                group relative
+                flex items-center justify-center
+                w-14 h-14
+                cursor-pointer
+                transition-transform duration-100
+                active:scale-95
+              "
             >
+              {/* Icon circle */}
               <div
                 className={`
                   w-12 h-12 rounded-full
                   flex items-center justify-center
-                  border interactive
+                  border
+                  transition-all duration-100
+                  group-hover:scale-105
                   ${
                     isActive
                       ? "border-gold-main text-gold-main gold-glow"
@@ -46,20 +58,20 @@ export default function DesktopNav() {
               >
                 <Icon name={icon} />
               </div>
+
+              {/* Tooltip */}
               <span
                 className="
-                  absolute left-14 top-1/2 -translate-y-1/2
+                  absolute left-16 top-1/2 -translate-y-1/2
                   px-3 py-1 rounded-md surface
-                  text-text-primary text-sm
-                  
-                  /* Added styles */
-                  font-bold
+                  text-text-primary text-sm font-bold
                   border border-gold-main/50
                   shadow-[0_0_10px_rgba(212,175,55,0.2)]
-                  
                   opacity-0 translate-x-2
                   group-hover:opacity-100 group-hover:translate-x-0
-                  transition-all whitespace-nowrap
+                  transition-all duration-150
+                  whitespace-nowrap
+                  pointer-events-none
                 "
               >
                 {label}

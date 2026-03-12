@@ -4,7 +4,7 @@ import useActiveSection from "../hooks/useActiveSection";
 const items = [
   { id: "home", label: "Home", icon: "Home" },
   { id: "about", label: "About", icon: "User" },
-  { id: "certificates", label: "Certificates", icon: "Award" },
+  { id: "certificates", label: "Skills", icon: "Code2" },
   { id: "projects", label: "Projects", icon: "FolderGit2" },
   { id: "contact", label: "Contact", icon: "Mail" },
 ];
@@ -30,7 +30,7 @@ export default function MobileNav() {
             <button
               key={id}
               onClick={() => handleClick(id)}
-              className={`flex flex-col items-center ${
+              className={`flex flex-col items-center cursor-pointer ${
                 isActive ? "text-gold-main" : "text-text-muted"
               }`}
             >

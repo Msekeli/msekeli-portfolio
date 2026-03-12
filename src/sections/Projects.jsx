@@ -53,7 +53,7 @@ export default function Projects() {
         <div className="flex items-center justify-between mb-1">
           <SectionTitle>Projects</SectionTitle>
 
-          <span className="text-sm text-text-secondary">
+          <span className="text-sm md:text-lg font-bold text-text-white">
             {index + 1}-{Math.min(index + perPage, total)} of {total}
           </span>
         </div>
@@ -63,7 +63,7 @@ export default function Projects() {
           <button
             onClick={prev}
             disabled={index === 0}
-            className="text-sm text-text-secondary hover:text-gold-main disabled:opacity-30"
+            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
           >
             ← Previous
           </button>
@@ -71,7 +71,7 @@ export default function Projects() {
           <button
             onClick={next}
             disabled={index + perPage >= total}
-            className="text-sm text-text-secondary hover:text-gold-main disabled:opacity-30"
+            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
           >
             Next →
           </button>
@@ -92,7 +92,7 @@ export default function Projects() {
             <Surface
               key={project.title}
               elevated
-              className="group flex flex-col hover:gold-glow transition"
+              className="group flex flex-col gold-glow transition"
             >
               {/* Image */}
               <div className="aspect-video overflow-hidden rounded-lg">
@@ -103,11 +103,23 @@ export default function Projects() {
                 />
               </div>
 
-              <div className="mt-3 space-y-2 flex flex-col grow">
+              <div className="mt-3 space-y-3 flex flex-col grow">
                 {/* Title */}
                 <h3 className="text-sm font-medium text-text-primary">
                   {project.title}
                 </h3>
+
+                {/* Tech */}
+                <div className="flex flex-wrap gap-1">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 border border-gold-main/30 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
                 {/* Description */}
                 <Text
@@ -117,20 +129,8 @@ export default function Projects() {
                   {project.description}
                 </Text>
 
-                {/* Tech */}
-                <div className="flex flex-wrap gap-1">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-0.5 border border-gold-main/30 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
                 {/* Buttons */}
-                <div className="flex gap-2 pt-2 mt-auto">
+                <div className="flex flex-wrap gap-2 pt-2 mt-auto">
                   {project.demo && (
                     <a
                       href={project.demo}

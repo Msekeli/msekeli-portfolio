@@ -2,13 +2,14 @@ import Section from "../components/Section";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import hero from "../data/hero.json";
+import Surface from "../components/Surface";
 
 export default function Hero() {
   return (
     <Section id="home">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:pt-12 items-center">
         {/* Text */}
-        <div className="space-y-6 max-w-xl">
+        <div className="space-y-6 max-w-xl stagger">
           <Text variant="secondary">{hero.greeting}</Text>
 
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold gold-accent leading-tight">
@@ -37,13 +38,13 @@ export default function Hero() {
 
         {/* Image */}
         <div className="w-full lg:max-w-md lg:ml-auto">
-          <div className="surface rounded-2xl gold-glow p-6">
+          <Surface className="gold-glow animate-fade">
             <img
               src="/images/hero.png"
               alt="Hero illustration"
               className="w-full h-auto object-contain"
             />
-          </div>
+          </Surface>
         </div>
       </div>
     </Section>
