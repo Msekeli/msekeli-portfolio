@@ -5,17 +5,17 @@ export default function Surface({
   noPadding = false,
   ...props
 }) {
+  const baseClasses = `
+    surface
+    interactive
+    rounded-2xl
+    ${noPadding ? "" : "p-6"}
+  `;
+
+  const elevationClass = elevated ? "surface--elevated" : "";
+
   return (
-    <div
-      {...props}
-      className={`
-        surface
-        rounded-2xl
-        ${noPadding ? "" : "p-6"}
-        ${elevated ? "surface--elevated" : ""}
-        ${className}
-      `}
-    >
+    <div {...props} className={`${baseClasses} ${elevationClass} ${className}`}>
       {children}
     </div>
   );

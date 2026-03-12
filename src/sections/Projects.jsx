@@ -53,7 +53,7 @@ export default function Projects() {
         <div className="flex items-center justify-between mb-1">
           <SectionTitle>Projects</SectionTitle>
 
-          <span className="text-sm text-text-secondary">
+          <span className="text-sm md:text-lg font-bold text-text-white">
             {index + 1}-{Math.min(index + perPage, total)} of {total}
           </span>
         </div>
@@ -63,7 +63,7 @@ export default function Projects() {
           <button
             onClick={prev}
             disabled={index === 0}
-            className="text-sm text-text-secondary hover:text-gold-main disabled:opacity-30"
+            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
           >
             ← Previous
           </button>
@@ -71,7 +71,7 @@ export default function Projects() {
           <button
             onClick={next}
             disabled={index + perPage >= total}
-            className="text-sm text-text-secondary hover:text-gold-main disabled:opacity-30"
+            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
           >
             Next →
           </button>

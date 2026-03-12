@@ -3,6 +3,7 @@ export default function Button({
   to,
   onClick,
   variant = "primary",
+  className = "",
   ...props
 }) {
   const handleClick = (e) => {
@@ -18,19 +19,21 @@ export default function Button({
   };
 
   const baseClasses = `
-  inline-flex items-center gap-2
-  px-4 py-2
-  rounded-md
-  whitespace-nowrap
-  interactive
-  cursor-pointer
-  text-sm
-`;
+    inline-flex items-center gap-2
+    px-4 py-2
+    rounded-md
+    whitespace-nowrap
+    cursor-pointer
+    interactive
+    text-sm
+    font-medium
+  `;
 
   const variants = {
     primary: `
       border border-gold-main
       text-gold-main
+      hover:bg-gold-main/10
     `,
     secondary: `
       surface
@@ -43,7 +46,7 @@ export default function Button({
     <button
       {...props}
       onClick={handleClick}
-      className={`${baseClasses} ${variants[variant]}`}
+      className={`${baseClasses} ${variants[variant]} ${className}`}
     >
       {children}
     </button>
