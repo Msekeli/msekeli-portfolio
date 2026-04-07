@@ -40,7 +40,7 @@ export default function Hero() {
         <div className="w-full lg:max-w-md lg:ml-auto">
           <Surface className="gold-glow animate-fade">
             <img
-              src="/images/hero.png"
+              src="/images/hero-img.png"
               alt="Hero illustration"
               className="w-full h-auto object-contain"
             />
