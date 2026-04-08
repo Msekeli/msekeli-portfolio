@@ -29,27 +29,40 @@
     "image": "/images/smartwheel.webp"
   },
   {
-    "title": "Task Manager",
-    "description": "A productivity app to manage and track daily tasks.",
-    "tech": ["React", "Node.js", "MongoDB"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "EventReserve",
+    "description": "A simple event reservation system to create, update, and manage bookings through a clean API and minimal frontend.",
+    "tech": ["ASP.NET Core (.NET 9)", "React", "Tailwind CSS"],
+    "demo": "https://github.com/Msekeli/EventReserve.git",
+    "repo": "https://github.com/Msekeli/EventReserve.git",
+    "image": "/images/event.webp"
   },
   {
-    "title": "E-commerce Platform",
-    "description": "A full-featured e-commerce website with payment integration.",
-    "tech": ["Next.js", "Stripe", "PostgreSQL"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "Simple Store",
+    "description": "A lightweight full-stack storefront built with Node.js and TypeScript backend and a React frontend, featuring clean architecture, API routing, state management, and a responsive shopping cart.",
+    "tech": [
+      "Node.js",
+      "TypeScript",
+      "Express",
+      "React",
+      "Zustand",
+      "Tailwind CSS",
+      "Vite"
+    ],
+    "demo": "https://github.com/Msekeli/simple-store1.git",
+    "repo": "https://github.com/Msekeli/simple-store1.git",
+    "image": "/images/s-store.webp"
   },
   {
-    "title": "Blog CMS",
-    "description": "A content management system for blogging with rich text editing.",
-    "tech": ["Django", "SQLite", "Bootstrap"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "CourseEnrollmentApp",
+    "description": "A full-stack course enrollment system built with Blazor WebAssembly and ASP.NET Core Web API, featuring JWT authentication, course management, and Clean Architecture.",
+    "tech": [
+      "Blazor WebAssembly",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "JWT"
+    ],
+    "demo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
+    "repo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
+    "image": "/images/enrol.webp"
   }
 ]
