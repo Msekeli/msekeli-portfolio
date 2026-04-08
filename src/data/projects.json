@@ -37,12 +37,20 @@
     "image": "/images/event.webp"
   },
   {
-    "title": "E-commerce Platform",
-    "description": "A full-featured e-commerce website with payment integration.",
-    "tech": ["Next.js", "Stripe", "PostgreSQL"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "Simple Store",
+    "description": "A lightweight full-stack storefront built with Node.js and TypeScript backend and a React frontend, featuring clean architecture, API routing, state management, and a responsive shopping cart.",
+    "tech": [
+      "Node.js",
+      "TypeScript",
+      "Express",
+      "React",
+      "Zustand",
+      "Tailwind CSS",
+      "Vite"
+    ],
+    "demo": "https://github.com/Msekeli/simple-store1.git",
+    "repo": "https://github.com/Msekeli/simple-store1.git",
+    "image": "/images/s-store.webp"
   },
   {
     "title": "Blog CMS",
