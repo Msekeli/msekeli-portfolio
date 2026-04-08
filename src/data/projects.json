@@ -53,11 +53,16 @@
     "image": "/images/s-store.webp"
   },
   {
-    "title": "Blog CMS",
-    "description": "A content management system for blogging with rich text editing.",
-    "tech": ["Django", "SQLite", "Bootstrap"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "CourseEnrollmentApp",
+    "description": "A full-stack course enrollment system built with Blazor WebAssembly and ASP.NET Core Web API, featuring JWT authentication, course management, and Clean Architecture.",
+    "tech": [
+      "Blazor WebAssembly",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "JWT"
+    ],
+    "demo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
+    "repo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
+    "image": "/images/enrol.webp"
   }
 ]
