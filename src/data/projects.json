@@ -29,12 +29,12 @@
     "image": "/images/smartwheel.webp"
   },
   {
-    "title": "Task Manager",
-    "description": "A productivity app to manage and track daily tasks.",
-    "tech": ["React", "Node.js", "MongoDB"],
-    "demo": "#",
-    "repo": "#",
-    "image": "/images/mysite.png"
+    "title": "EventReserve",
+    "description": "A simple event reservation system to create, update, and manage bookings through a clean API and minimal frontend.",
+    "tech": ["ASP.NET Core (.NET 9)", "React", "Tailwind CSS"],
+    "demo": "https://github.com/Msekeli/EventReserve.git",
+    "repo": "https://github.com/Msekeli/EventReserve.git",
+    "image": "/images/event.webp"
   },
   {
     "title": "E-commerce Platform",
