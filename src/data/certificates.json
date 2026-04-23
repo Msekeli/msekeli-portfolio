@@ -1,14 +1,14 @@
 [
-  { "id": 1, "image": "/certs/cert12.webp" },
-  { "id": 2, "image": "/certs/cert11.webp" },
-  { "id": 3, "image": "/certs/cert10.webp" },
-  { "id": 4, "image": "/certs/cert9.webp" },
-  { "id": 5, "image": "/certs/cert8.webp" },
-  { "id": 6, "image": "/certs/cert7.webp" },
-  { "id": 7, "image": "/certs/cert6.webp" },
-  { "id": 8, "image": "/certs/cert5.webp" },
-  { "id": 9, "image": "/certs/cert4.webp" },
-  { "id": 10, "image": "/certs/cert3.webp" },
-  { "id": 11, "image": "/certs/cert2.webp" },
-  { "id": 12, "image": "/certs/cert1.webp" }
+  { "id": 1, "image": "/certs/cert1.webp" },
+  { "id": 2, "image": "/certs/cert2.webp" },
+  { "id": 3, "image": "/certs/cert3.webp" },
+  { "id": 4, "image": "/certs/cert4.webp" },
+  { "id": 5, "image": "/certs/cert5.webp" },
+  { "id": 6, "image": "/certs/cert6.webp" },
+  { "id": 7, "image": "/certs/cert7.webp" },
+  { "id": 8, "image": "/certs/cert8.webp" },
+  { "id": 9, "image": "/certs/cert9.webp" },
+  { "id": 10, "image": "/certs/cert10.webp" },
+  { "id": 11, "image": "/certs/cert11.webp" },
+  { "id": 12, "image": "/certs/cert12.webp" }
 ]
