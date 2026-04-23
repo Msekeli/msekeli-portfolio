@@ -23,3 +23,9 @@
   --color-gold-soft: var(--gold-soft);
   --color-gold-deep: var(--gold-deep);
 }
+.image-render-crisp {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
