@@ -1,8 +1,9 @@
 import Section from "../components/Section";
 import Text from "../components/Text";
 import Button from "../components/Button";
-import hero from "../data/hero.json";
 import Surface from "../components/Surface";
+import HeroCraftedStrip from "../components/HeroCraftedStrip";
+import hero from "../data/hero.json";
 
 export default function Hero() {
   return (
@@ -22,15 +23,6 @@ export default function Hero() {
 
           <Text className="max-w-lg">{hero.description}</Text>
 
-          {Array.isArray(hero.techStack) && (
-            <div className="pt-2 hidden lg:block">
-              <span className="tag">
-                <span className="tag-label">{hero.techStackLabel}</span>
-                <span className="tag-value">{hero.techStack.join(" · ")}</span>
-              </span>
-            </div>
-          )}
-
           <div className="pt-2">
             <Button to="projects">{hero.cta}</Button>
           </div>
@@ -47,6 +39,8 @@ export default function Hero() {
           </Surface>
         </div>
       </div>
+
+      <HeroCraftedStrip title={hero.craftedTitle} items={hero.craftedItems} />
     </Section>
   );
 }

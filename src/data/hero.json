@@ -3,7 +3,14 @@
   "name": "Msekeli Mkwibiso",
   "headline": "Full-Stack Software Engineer",
   "description": "Welcome to my digital project. I am a dedicated software developer with a passion for crafting innovative and user-centric web applications. This platform showcases my expertise in blending creativity with technical proficiency to deliver exceptional digital experiences.",
-  "techStackLabel": "Built with :",
-  "techStack": ["React", "JavaScript", "Tailwind CSS", "Vite"],
+  "craftedTitle": "Crafted with",
+  "craftedItems": [
+    "React",
+    "JavaScript",
+    "CSS",
+    "Tailwind CSS",
+    "Vite",
+    "Vercel"
+  ],
   "cta": "View My Work"
 }
