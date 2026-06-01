@@ -1,82 +1,70 @@
 [
   {
-    "title": "InterviewPrep (In Progress)",
-    "description": "AI mock interview platform for generating questions, capturing answers, and evaluating responses using Gemini.",
+    "title": "Interview Prep",
+    "description": "AI-powered interview preparation platform built with Clean Architecture to simulate realistic job interviews based on a candidate's CV, target role, and company context. Generates tailored interview questions, evaluates responses, provides personalized feedback, tracks performance across interview sessions, and includes automated unit testing for core business logic.",
     "tech": [
-      "ASP.NET Core Web API (.NET 9)",
-      "Next.js 14",
-      "EF Core",
-      "SQLite",
+      "Next.js",
+      "TypeScript",
+      ".NET 9",
       "Gemini API",
-      "Azure"
-    ],
-    "demo": "https://github.com/Msekeli/InterviewPrep.git",
-    "repo": "https://github.com/Msekeli/InterviewPrep.git",
-    "image": "/images/interviewprep.webp"
-  },
-  {
-    "title": "Inventory Ledger",
-    "description": "Inventory system for managing products, tracking stock movements, monitoring inventory levels, and identifying low-stock items.",
-    "tech": [
-      "Blazor WebAssembly",
-      "ASP.NET Core Web API",
-      "Entity Framework Core",
+      "Azure Speech Services",
       "SQLite"
     ],
-    "demo": "https://github.com/Msekeli/InventoryLedger.git",
+    "demo": "https://www.youtube.com/watch?v=nx9n_ekBwrE",
+    "repo": "https://github.com/Msekeli/InterviewPrep.git",
+    "image": "/images/interview-session.svg"
+  },
+  {
+    "title": "Spaza Stock Manager",
+    "description": "Enterprise-style inventory management system for retail and spaza shops. Built with Clean Architecture, Azure SQL, stored procedures, supplier management, stock tracking, inventory valuation, operational dashboards, and unit-tested business workflows.",
+    "tech": [
+      "Blazor WebAssembly",
+      ".NET 8",
+      "Azure SQL",
+      "Stored Procedures",
+      "Radzen",
+      "Bootstrap"
+    ],
+    "demo": "https://www.youtube.com/watch?v=HCuIlkI5fFY",
     "repo": "https://github.com/Msekeli/InventoryLedger.git",
     "image": "/images/inventory.png"
   },
   {
-    "title": "Authentication Login System",
-    "description": "A full-stack authentication system that allows users to register, log in, and securely access their profile through protected routes.",
-    "tech": ["React", "ASP.NET Core Web API", "PostgreSQL"],
-    "demo": "https://github.com/Msekeli/LoginSystem.git",
+    "title": "Authentication System",
+    "description": "Full-stack authentication platform providing secure user registration, login, JWT authentication, refresh token management, role-based authorization, protected routes, and unit-tested authentication workflows. Designed as the foundation for a future reusable identity platform.",
+    "tech": [
+      "React",
+      ".NET 9",
+      "PostgreSQL",
+      "JWT",
+      "REST API",
+      "Tailwind CSS"
+    ],
+    "demo": "",
     "repo": "https://github.com/Msekeli/LoginSystem.git",
     "image": "/images/login.webp"
   },
   {
     "title": "SmartWheel",
-    "description": "A full-stack reward wheel application where users answer riddles and spin a wheel to win prizes determined entirely by the backend.",
-    "tech": ["React", "Vite", "ASP.NET Core Minimal API", "SQLite", "Azure"],
-    "demo": "https://smartwheel-api-msekeli-g0g3e5gvetb5fwdt.southafricanorth-01.azurewebsites.net/sagger",
+    "description": "Gamified rewards platform where users solve riddles to earn spins and win prizes. Features backend-controlled prize allocation, reward tracking, balance management, cooldown enforcement, Clean Architecture, and unit-tested business rules.",
+    "tech": ["React", ".NET 9", "SQLite", "Azure", "Tailwind CSS", "Vite"],
+    "demo": "https://www.youtube.com/watch?v=LSizr1bpCD8",
     "repo": "https://github.com/Msekeli/SmartWheel2",
     "image": "/images/smartwheel.webp"
   },
   {
     "title": "EventReserve",
-    "description": "A simple event reservation system to create, update, and manage bookings through a clean API and minimal frontend.",
-    "tech": ["ASP.NET Core (.NET 9)", "React", "Tailwind CSS"],
-    "demo": "https://github.com/Msekeli/EventReserve.git",
+    "description": "Event reservation platform that allows users to create, manage, and track event bookings through a responsive React frontend and ASP.NET Core API. Features reservation management, event scheduling, validation, and RESTful API integration.",
+    "tech": ["React", ".NET 9", "Tailwind CSS", "REST API"],
+    "demo": "https://www.youtube.com/watch?v=aGux4z_jVuA",
     "repo": "https://github.com/Msekeli/EventReserve.git",
     "image": "/images/event.webp"
   },
   {
-    "title": "Simple Store",
-    "description": "A lightweight full-stack storefront built with Node.js and TypeScript backend and a React frontend, featuring clean architecture, API routing, state management, and a responsive shopping cart.",
-    "tech": [
-      "Node.js",
-      "TypeScript",
-      "Express",
-      "React",
-      "Zustand",
-      "Tailwind CSS",
-      "Vite"
-    ],
-    "demo": "https://github.com/Msekeli/simple-store1.git",
-    "repo": "https://github.com/Msekeli/simple-store1.git",
-    "image": "/images/s-store.webp"
-  },
-  {
-    "title": "CourseEnrollmentApp",
-    "description": "A full-stack course enrollment system built with Blazor WebAssembly and ASP.NET Core Web API, featuring JWT authentication, course management, and Clean Architecture.",
-    "tech": [
-      "Blazor WebAssembly",
-      "ASP.NET Core",
-      "Entity Framework Core",
-      "JWT"
-    ],
-    "demo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
+    "title": "Course Enrollment App",
+    "description": "Full-stack course enrollment platform featuring JWT authentication, course management, enrollment workflows, and a Clean Architecture approach using Blazor and ASP.NET Core.",
+    "tech": ["Blazor WebAssembly", ".NET", "Entity Framework Core", "JWT"],
+    "demo": "",
     "repo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
     "image": "/images/enrol.webp"
   }
