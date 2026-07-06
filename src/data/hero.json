@@ -3,14 +3,5 @@
   "name": "Msekeli Mkwibiso",
   "headline": "Full-Stack .NET Software Engineer",
   "description": "Welcome to my digital portfolio, where personal projects, technical exploration, and thoughtful engineering come together to turn ideas into real, working software.",
-  "craftedTitle": "Crafted with",
-  "craftedItems": [
-    "React",
-    "JavaScript",
-    "CSS",
-    "Tailwind CSS",
-    "Vite",
-    "Vercel"
-  ],
   "cta": "View My Work"
 }

@@ -2,7 +2,7 @@ import Section from "../components/Section";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import Surface from "../components/Surface";
-import HeroCraftedStrip from "../components/HeroCraftedStrip";
+import HeroMetrics from "../components/HeroMetrics/HeroMetrics";
 import hero from "../data/hero.json";
 
 export default function Hero() {
@@ -29,18 +29,17 @@ export default function Hero() {
         </div>
 
         {/* Image */}
-        <div className="w-full lg:max-w-md lg:ml-auto">
-          <Surface className="gold-glow animate-fade">
+        <div className="w-full lg:max-w-xl lg:ml-auto">
+          <Surface noPadding className="gold-glow animate-fade overflow-hidden">
             <img
-              src="/images/hero-img.png"
-              alt="Hero illustration"
-              className="w-full h-auto object-contain"
+              src="/images/my-hero-img.webp"
+              alt="Hero image"
+              className="w-full h-full object-cover"
             />
           </Surface>
         </div>
+        <HeroMetrics className="lg:col-span-2" />
       </div>
-
-      <HeroCraftedStrip title={hero.craftedTitle} items={hero.craftedItems} />
     </Section>
   );
 }
