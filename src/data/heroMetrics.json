@@ -1,0 +1,23 @@
+[
+  {
+    "id": "experience",
+    "icon": "CalendarDays",
+    "value": 3,
+    "suffix": "+",
+    "label": "Years Building Software"
+  },
+  {
+    "id": "projects",
+    "icon": "FolderGit2",
+    "value": 9,
+    "suffix": "+",
+    "label": "Full-Stack Projects"
+  },
+  {
+    "id": "teams",
+    "icon": "Users",
+    "value": 3,
+    "suffix": "",
+    "label": "Agile Teams"
+  }
+]
