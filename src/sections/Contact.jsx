@@ -60,9 +60,9 @@ export default function Contact() {
     <Section id="contact">
       <SectionTitle>Contact</SectionTitle>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* LEFT: Contact form */}
-        <Surface className="gold-glow">
+        <Surface className="gold-glow surface-lift">
           <div className="space-y-6 ">
             <Text variant="secondary">
               If you’d like to get in touch, send a message and I’ll respond as
@@ -84,7 +84,7 @@ export default function Contact() {
                 type="text"
                 placeholder="Your name"
                 required
-                className="w-full surface px-4 py-3 rounded-lg"
+                className="w-full surface field-focus border border-white/5 px-4 py-3 rounded-lg"
               />
 
               <input
@@ -92,7 +92,7 @@ export default function Contact() {
                 type="email"
                 placeholder="Your email"
                 required
-                className="w-full surface px-4 py-3 rounded-lg"
+                className="w-full surface field-focus border border-white/5 px-4 py-3 rounded-lg"
               />
 
               <textarea
@@ -100,7 +100,7 @@ export default function Contact() {
                 rows="4"
                 placeholder="Your message"
                 required
-                className="w-full surface px-4 py-3 rounded-lg resize-none"
+                className="w-full surface field-focus border border-white/5 px-4 py-3 rounded-lg resize-none"
               />
 
               <Button type="submit" disabled={status === "sending"}>
@@ -119,7 +119,7 @@ export default function Contact() {
         </Surface>
 
         {/* RIGHT: Map */}
-        <Surface className="overflow-hidden gold-glow">
+        <Surface className="overflow-hidden gold-glow surface-lift">
           <iframe
             title="Location"
             src="https://www.google.com/maps?q=Salt+River,+Cape+Town,+7925&z=14&output=embed"

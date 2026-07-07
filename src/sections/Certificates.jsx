@@ -29,19 +29,20 @@ export default function Certificates() {
         {/* Skills Grid */}
         <div
           className="
+            stagger
             grid grid-cols-1 md:grid-cols-3
             gap-5
             max-w-6xl mx-auto
             mb-15"
         >
-          <Surface className="gold-glow p-10">
+          <Surface className="gold-glow surface-lift p-10">
             {" "}
             <h3 className="text-base font-semibold mb-2">Frontend</h3>
             <div className="flex flex-wrap gap-2">
               {skills.frontend.map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 text-xs rounded-full bg-white/10"
+                  className="px-3 py-1 text-xs rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-gold-main/15 hover:text-gold-soft"
                 >
                   {skill}
                 </span>
@@ -49,14 +50,14 @@ export default function Certificates() {
             </div>
           </Surface>
 
-          <Surface className="gold-glow p-10">
+          <Surface className="gold-glow surface-lift p-10">
             {" "}
             <h3 className="text-base font-semibold mb-2">Backend & Data</h3>
             <div className="flex flex-wrap gap-2">
               {skills.backend.map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 text-xs rounded-full bg-white/10"
+                  className="px-3 py-1 text-xs rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-gold-main/15 hover:text-gold-soft"
                 >
                   {skill}
                 </span>
@@ -64,14 +65,14 @@ export default function Certificates() {
             </div>
           </Surface>
 
-          <Surface className="gold-glow p-10">
+          <Surface className="gold-glow surface-lift p-10">
             {" "}
             <h3 className="text-base font-semibold mb-2">Cloud & Tools</h3>
             <div className="flex flex-wrap gap-2">
               {skills.cloud.map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 text-xs rounded-full bg-white/10"
+                  className="px-3 py-1 text-xs rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-gold-main/15 hover:text-gold-soft"
                 >
                   {skill}
                 </span>

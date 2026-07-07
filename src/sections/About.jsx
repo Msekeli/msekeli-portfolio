@@ -12,7 +12,7 @@ export default function About() {
     <Section id="about">
       <SectionTitle>About</SectionTitle>
 
-      <div className="space-y-4">
+      <div className="stagger space-y-4">
         {items.map((item, index) => {
           const open = openIndex === index;
 
@@ -20,7 +20,9 @@ export default function About() {
             <div key={item.q}>
               <Surface
                 elevated={open}
-                className={open ? "gold-glow border border-gold-main/30" : ""}
+                className={`surface-lift ${
+                  open ? "gold-glow border border-gold-main/30" : ""
+                }`}
               >
                 <button
                   onClick={() => setOpenIndex(open ? null : index)}
@@ -38,8 +40,8 @@ export default function About() {
                   <span
                     className={
                       open
-                        ? "text-gold-main text-lg leading-none"
-                        : "text-text-muted text-lg leading-none"
+                        ? "text-gold-main text-lg leading-none transition-transform duration-200 rotate-180"
+                        : "text-text-muted text-lg leading-none transition-transform duration-200"
                     }
                   >
                     {open ? "–" : "+"}
@@ -47,7 +49,7 @@ export default function About() {
                 </button>
 
                 {open && (
-                  <div className="px-4 pb-4">
+                  <div className="animate-slide-up px-4 pb-4">
                     <Text variant="secondary">{item.a}</Text>
                   </div>
                 )}

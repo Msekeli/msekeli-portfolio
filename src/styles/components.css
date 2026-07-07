@@ -27,6 +27,34 @@
   transform: translateY(-3px);
 }
 
+.surface-lift {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.surface-lift:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    var(--shadow-elevated),
+    0 0 26px rgba(212, 175, 55, 0.18);
+}
+
+.field-focus {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.field-focus:focus {
+  outline: none;
+  border-color: rgba(212, 175, 55, 0.42);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+  transform: translateY(-1px);
+}
+
 /* ========= GOLD EMPHASIS ========= */
 
 .gold-glow {

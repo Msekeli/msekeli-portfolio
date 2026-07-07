@@ -46,7 +46,7 @@ export default function MetricCard({
   }, [delay, value]);
 
   return (
-    <Surface noPadding className="gold-glow h-full p-4">
+    <Surface noPadding className="gold-glow surface-lift h-full p-4">
       <div className="flex items-start justify-center gap-2.5 text-center sm:text-left">
         <div className="mt-0.5 rounded-md border border-gold-main/30 bg-gold-main/10 p-1.5 text-gold-soft">
           <Icon name={icon} className="w-3.5 h-3.5" />

@@ -8,7 +8,7 @@ import hero from "../data/hero.json";
 export default function Hero() {
   return (
     <Section id="home">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:pt-12 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:pt-8 items-center">
         {/* Text */}
         <div className="space-y-6 max-w-xl stagger">
           <Text variant="secondary">{hero.greeting}</Text>
