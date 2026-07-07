@@ -48,7 +48,7 @@ export default function Projects() {
   return (
     <Section id="projects">
       {" "}
-      <div className="flex flex-col">
+      <div className="stagger flex flex-col">
         {" "}
         <div className="flex items-center justify-between mb-1">
           {" "}
@@ -86,7 +86,7 @@ export default function Projects() {
             <Surface
               key={project.title}
               elevated
-              className="group flex flex-col gold-glow transition"
+              className="group flex flex-col gold-glow surface-lift transition"
             >
               <div className="aspect-video overflow-hidden rounded-lg">
                 <img
@@ -108,7 +108,7 @@ export default function Projects() {
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="text-xs px-2 py-1 border border-gold-main/30 rounded"
+                    className="text-xs px-2 py-1 border border-gold-main/30 rounded transition group-hover:border-gold-main/60 group-hover:text-gold-soft"
                     >
                       {tech}
                     </span>

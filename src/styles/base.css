@@ -27,6 +27,103 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  min-height: 100%;
+}
+
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.82;
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.16) 34%,
+    rgba(0, 0, 0, 0.72) 68%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.16) 34%,
+    rgba(0, 0, 0, 0.72) 68%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.app-background__grid {
+  width: 160vw;
+  height: 140vh;
+  transform: translate3d(-30vw, -20vh, 0);
+  animation: background-grid-drift 14s linear infinite;
+  will-change: transform;
+}
+
+.app-background__minor-line,
+.app-background__major-line {
+  fill: none;
+}
+
+.app-background__minor-line {
+  stroke: rgba(184, 193, 217, 0.04);
+  stroke-width: 0.35;
+}
+
+.app-background__major-line {
+  stroke: rgba(127, 137, 166, 0.09);
+  stroke-width: 0.45;
+}
+
+.app-background__edge-lines {
+  fill: none;
+  stroke: rgba(230, 201, 106, 0.24);
+  stroke-width: 0.45;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.35));
+}
+
+.app-background__accent {
+  fill: rgba(255, 224, 130, 0.92);
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.85));
+}
+
+.app-background__accent--float {
+  animation: background-gold-float 8s ease-in-out infinite alternate;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+@keyframes background-grid-drift {
+  from {
+    transform: translate3d(-30vw, -20vh, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-30vw - 48px), calc(-20vh - 32px), 0);
+  }
+}
+
+@keyframes background-gold-float {
+  from {
+    opacity: 0.55;
+    transform: translate3d(-8px, -4px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(10px, 6px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-background__grid,
+  .app-background__accent--float {
+    animation: none;
+  }
+}
+
 /* ========= TEXT HIERARCHY ========= */
 p {
   color: var(--text-secondary);
