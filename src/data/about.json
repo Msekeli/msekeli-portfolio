@@ -1,11 +1,11 @@
 [
   {
     "q": "Professional Overview",
-    "a": "I’m a Full-Stack Software Engineer with over three years of experience building enterprise and customer-facing web applications using C#, ASP.NET Core, Blazor, Azure, and Microsoft SQL Server, with additional frontend expertise in React. I design scalable backend services, build reliable APIs, and develop responsive user interfaces that perform well in real-world production environments. I enjoy solving business problems through clean architecture, thoughtful implementation, and software that remains reliable over time."
+    "a": "I'm a Software Engineer with over three years of experience building responsive, production-ready interfaces in React and Blazor, backed by strong experience in C#, ASP.NET Core, Azure, and Microsoft SQL Server. I design scalable backend services, build reliable APIs, and develop user interfaces that perform well in real-world production environments. I enjoy solving business problems through clean architecture, thoughtful implementation, and software that remains reliable over time."
   },
   {
     "q": "Professional Work Experience",
-    "a": "I’ve contributed to both high-traffic digital platforms and production-critical enterprise systems. At Digital Gaming Corporations SA, I worked on acquisition platforms for Betway and JackpotCity, building responsive web interfaces, supporting cloud-based services, and contributing to live production environments serving real users at scale. Later, through EXL Services at Ardagh Group, I helped modernize a global production monitoring platform using C#, .NET, Blazor, and SQL-based integrations, delivering stable software used across factories in multiple regions worldwide where performance, accuracy, and long-term reliability were essential."
+    "a": "I've contributed to both high-traffic digital platforms and production-critical enterprise systems. At Digital Gaming Corporations SA, I worked on acquisition platforms for Betway and JackpotCity, building responsive web interfaces, supporting cloud-based services, and contributing to live production environments serving real users at scale. Later, through EXL Services at Ardagh Group, I helped modernize a global production monitoring platform using C#, .NET, Blazor, and SQL-based integrations, delivering stable software used across factories in multiple regions worldwide where performance, accuracy, and long-term reliability were essential."
   },
   {
     "q": "My Journey into Software Development",
@@ -13,6 +13,6 @@
   },
   {
     "q": "Beyond Software",
-    "a": "Outside of software development, I’m naturally curious and enjoy learning, building personal projects, and exploring new ideas—many of my evenings are still spent at my computer experimenting, studying, or thinking through future projects. I also enjoy following current affairs, spending quality time with friends, and having meaningful conversations that broaden my perspective. I genuinely enjoy sharing knowledge, encouraging others, and learning from people with different backgrounds, which carries naturally into how I collaborate with teams and approach problem-solving."
+    "a": "Outside of software development, I'm naturally curious and enjoy learning, building personal projects, and exploring new ideas. Many of my evenings are still spent at my computer experimenting, studying, or thinking through future projects. I also enjoy following current affairs, spending quality time with friends, and having meaningful conversations that broaden my perspective. I genuinely enjoy sharing knowledge, encouraging others, and learning from people with different backgrounds, which carries naturally into how I collaborate with teams and approach problem-solving."
   }
 ]
