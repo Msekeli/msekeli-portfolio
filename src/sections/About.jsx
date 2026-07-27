@@ -15,6 +15,7 @@ export default function About() {
       <div className="stagger space-y-4">
         {items.map((item, index) => {
           const open = openIndex === index;
+          const panelId = `about-panel-${index}`;
 
           return (
             <div key={item.q}>
@@ -26,6 +27,8 @@ export default function About() {
               >
                 <button
                   onClick={() => setOpenIndex(open ? null : index)}
+                  aria-expanded={open}
+                  aria-controls={panelId}
                   className="
                     w-full px-4 py-3
                     flex justify-between items-start gap-4
@@ -38,6 +41,7 @@ export default function About() {
                   </span>
 
                   <span
+                    aria-hidden="true"
                     className={
                       open
                         ? "text-gold-main text-lg leading-none transition-transform duration-200 rotate-180"
@@ -49,7 +53,7 @@ export default function About() {
                 </button>
 
                 {open && (
-                  <div className="animate-slide-up px-4 pb-4">
+                  <div id={panelId} className="animate-slide-up px-4 pb-4">
                     <Text variant="secondary">{item.a}</Text>
                   </div>
                 )}

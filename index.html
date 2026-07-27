@@ -6,6 +6,11 @@
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Warm up the connection to Google Maps early so the embedded map
+         in the Contact section is ready by the time it's scrolled to -->
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
+
     <!-- Primary SEO -->
     <title>Msekeli Mkwibiso | Software Engineer</title>
 
@@ -32,7 +37,16 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://msekeli-portfolio.dev" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="/images/my-hero-img.webp" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Msekeli Mkwibiso | Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Building responsive, production-ready interfaces with React and Blazor, backed by strong C#, ASP.NET Core, Azure, and SQL Server experience."
+    />
+    <meta name="twitter:image" content="/images/my-hero-img.webp" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/my-m.svg" />

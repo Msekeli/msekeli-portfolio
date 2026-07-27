@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
 import Surface from "../components/Surface";
@@ -7,6 +8,8 @@ import skills from "../data/skills.json";
 
 export default function Certificates() {
   const [activeCert, setActiveCert] = useState(null);
+  const closeButtonRef = useRef(null);
+  const previouslyFocusedRef = useRef(null);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -16,6 +19,16 @@ export default function Certificates() {
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
+
+  useEffect(() => {
+    if (activeCert) {
+      previouslyFocusedRef.current = document.activeElement;
+      closeButtonRef.current?.focus();
+    } else if (previouslyFocusedRef.current) {
+      previouslyFocusedRef.current.focus();
+      previouslyFocusedRef.current = null;
+    }
+  }, [activeCert]);
 
   return (
     <Section id="certificates">
@@ -82,36 +95,42 @@ export default function Certificates() {
         </div>
 
         {/* Certificates Slider */}
-        <CertificatesSlider onSelect={setActiveCert} />
+        <CertificatesSlider onSelect={setActiveCert} paused={!!activeCert} />
       </div>
 
       {/* Modal */}
-      {activeCert && (
-        <div
-          className="absolute inset-0 z-40 flex items-center justify-center bg-black/40"
-          onClick={() => setActiveCert(null)}
-        >
-          <Surface
-            noPadding
-            elevated
-            className="gold-glow relative p-3 max-w-[90vw]"
-            onClick={(e) => e.stopPropagation()}
+      {activeCert &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Certificate preview"
+            onClick={() => setActiveCert(null)}
           >
-            <img
-              src={activeCert.image}
-              alt="Certificate preview"
-              className="max-h-[70vh] w-auto object-contain"
-            />
-
-            <button
-              onClick={() => setActiveCert(null)}
-              className="absolute -top-5 right-0 text-white/70 hover:text-yellow-400 transition"
+            <Surface
+              noPadding
+              elevated
+              className="gold-glow relative p-3 max-w-[90vw]"
+              onClick={(e) => e.stopPropagation()}
             >
-              Close ✕
-            </button>
-          </Surface>
-        </div>
-      )}
+              <img
+                src={activeCert.image}
+                alt="Certificate preview"
+                className="max-h-[70vh] w-auto object-contain"
+              />
+
+              <button
+                ref={closeButtonRef}
+                onClick={() => setActiveCert(null)}
+                className="absolute -top-5 right-0 text-white/70 hover:text-yellow-400 transition"
+              >
+                Close ✕
+              </button>
+            </Surface>
+          </div>,
+          document.body,
+        )}
     </Section>
   );
 }
