@@ -1,31 +1,23 @@
 import Icon from "../components/Icon";
 import useActiveSection from "../hooks/useActiveSection";
-
-const items = [
-  { id: "home", label: "Home", icon: "Home" },
-  { id: "about", label: "About", icon: "User" },
-  { id: "certificates", label: "Skills", icon: "Code2" },
-  { id: "projects", label: "Projects", icon: "FolderGit2" },
-  { id: "contact", label: "Contact", icon: "Mail" },
-];
+import navItems, { navIds } from "../data/nav";
 
 export default function DesktopNav() {
-  const activeId = useActiveSection(items.map((i) => i.id));
+  const activeId = useActiveSection(navIds);
 
   const handleClick = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
 
-    // instant navigation (feels much faster)
-    el.scrollIntoView({ behavior: "auto", block: "start" });
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
 
     history.replaceState(null, "", location.pathname);
   };
 
   return (
-    <aside className="hidden md:flex w-24 relative z-50">
-      <div className="mt-24 ml-15 surface rounded-2xl p-3 flex flex-col gap-4 gold-glow max-h-105 justify-center">
-        {items.map(({ id, label, icon }) => {
+    <aside className="hidden md:flex w-24 justify-center relative z-50">
+      <div className="mt-24 surface rounded-2xl p-3 flex flex-col gap-4 gold-glow max-h-105 justify-center">
+        {navItems.map(({ id, label, icon }) => {
           const isActive = activeId === id;
 
           return (

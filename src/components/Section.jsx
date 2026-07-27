@@ -6,6 +6,8 @@ export default function Section({ children, id }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const root = document.getElementById("scroll-container");
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -13,7 +15,7 @@ export default function Section({ children, id }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 },
+      { root, threshold: 0.35 },
     );
 
     if (ref.current) observer.observe(ref.current);

@@ -33,14 +33,17 @@
 
 .animate-slide-up {
   animation: slide-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
 }
 
 .animate-slide-left {
   animation: slide-left 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
 }
 
 .animate-slide-right {
   animation: slide-right 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
 }
 
 /* Staggered children */
@@ -48,6 +51,19 @@
 .stagger > * {
   opacity: 0;
   animation: slide-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
+}
+
+/* All Section content mounts at once on page load, so these entrance
+   animations would otherwise finish off-screen before you scroll to
+   them. Hold them paused at their 0% keyframe until the ancestor
+   <section> is revealed (Section.jsx adds .animate-fade via its
+   IntersectionObserver), then let them play. */
+.animate-fade .animate-slide-up,
+.animate-fade .animate-slide-left,
+.animate-fade .animate-slide-right,
+.animate-fade .stagger > * {
+  animation-play-state: running;
 }
 
 .stagger > *:nth-child(1) {

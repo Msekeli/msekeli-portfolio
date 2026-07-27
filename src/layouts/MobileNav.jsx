@@ -1,16 +1,9 @@
 import Icon from "../components/Icon";
 import useActiveSection from "../hooks/useActiveSection";
-
-const items = [
-  { id: "home", label: "Home", icon: "Home" },
-  { id: "about", label: "About", icon: "User" },
-  { id: "certificates", label: "Skills", icon: "Code2" },
-  { id: "projects", label: "Projects", icon: "FolderGit2" },
-  { id: "contact", label: "Contact", icon: "Mail" },
-];
+import navItems, { navIds } from "../data/nav";
 
 export default function MobileNav() {
-  const activeId = useActiveSection(items.map((i) => i.id));
+  const activeId = useActiveSection(navIds);
 
   const handleClick = (id) => {
     const el = document.getElementById(id);
@@ -23,7 +16,7 @@ export default function MobileNav() {
   return (
     <nav className="fixed bottom-0 inset-x-0 md:hidden h-16 surface border-t border-white/5 gold-glow">
       <div className="h-full flex justify-around items-center">
-        {items.map(({ id, label, icon }) => {
+        {navItems.map(({ id, label, icon }) => {
           const isActive = activeId === id;
 
           return (

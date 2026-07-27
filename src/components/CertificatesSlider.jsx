@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Surface from "./Surface";
 import certificates from "../data/certificates.json";
 
-export default function CertificatesSlider({ onSelect }) {
+export default function CertificatesSlider({ onSelect, paused = false }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const isInteractingRef = useRef(false);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -22,19 +23,49 @@ export default function CertificatesSlider({ onSelect }) {
     onSelectSlide();
   }, [emblaApi]);
 
-  // Auto scroll
+  // Pause autoplay while the user is dragging the slider
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const handlePointerDown = () => {
+      isInteractingRef.current = true;
+    };
+    const handleSettle = () => {
+      isInteractingRef.current = false;
+    };
+
+    emblaApi.on("pointerDown", handlePointerDown);
+    emblaApi.on("settle", handleSettle);
+
+    return () => {
+      emblaApi.off("pointerDown", handlePointerDown);
+      emblaApi.off("settle", handleSettle);
+    };
+  }, [emblaApi]);
+
+  // Auto scroll — skipped while hovered, dragging, or the parent modal is open
   useEffect(() => {
     if (!emblaApi) return;
 
     const autoplay = setInterval(() => {
-      emblaApi.scrollNext();
+      if (!paused && !isInteractingRef.current) {
+        emblaApi.scrollNext();
+      }
     }, 3500);
 
     return () => clearInterval(autoplay);
-  }, [emblaApi]);
+  }, [emblaApi, paused]);
 
   return (
-    <div className="mt-8 w-full relative">
+    <div
+      className="mt-8 w-full relative"
+      onMouseEnter={() => {
+        isInteractingRef.current = true;
+      }}
+      onMouseLeave={() => {
+        isInteractingRef.current = false;
+      }}
+    >
       {/* Slider */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
