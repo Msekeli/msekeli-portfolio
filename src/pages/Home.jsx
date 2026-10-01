@@ -17,7 +17,7 @@ export default function Home() {
     <div className="relative isolate min-h-screen">
       <AppBackground />
 
-      <div className="relative z-10">
+      <div className="relative z-10 pt-14">
         <Header />
         <Navigation />
 

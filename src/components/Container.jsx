@@ -1,7 +1,7 @@
 export default function Container({ children, className = "" }) {
   return (
     <div
-      className={`max-w-7xl mx-auto px-4 md:px-10 lg:pl-24 lg:pr-20 ${className}`}
+      className={`w-full px-[clamp(1rem,9vw,10%)] md:pl-[calc(clamp(1rem,9vw,10%)+10rem)] ${className}`}
     >
       {children}
     </div>
