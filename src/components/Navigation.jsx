@@ -7,14 +7,13 @@ export default function Navigation() {
 
   const handleClick = (id) => {
     const el = document.getElementById(id);
+
     if (!el) return;
 
     el.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-
-    history.replaceState(null, "", location.pathname);
   };
 
   return (
@@ -26,6 +25,7 @@ export default function Navigation() {
           return (
             <button
               key={id}
+              type="button"
               onClick={() => handleClick(id)}
               className="
                 group relative

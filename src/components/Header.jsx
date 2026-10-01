@@ -2,7 +2,7 @@ import Icon from "../components/Icon";
 
 export default function Header() {
   return (
-    <header className="w-screen relative left-1/2 -translate-x-1/2 surface border-b border-gold-main/20">
+    <header className="fixed top-0 left-0 right-0 z-50 surface border-b border-gold-main/20">
       <div className="h-14 flex items-center justify-between px-[clamp(1rem,9vw,10%)]">
         <img
           src="/images/logo.png"

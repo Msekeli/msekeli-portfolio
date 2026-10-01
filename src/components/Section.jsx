@@ -6,7 +6,9 @@ export default function Section({ children, id }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const root = document.getElementById("scroll-container");
+    const element = ref.current;
+
+    if (!element) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -15,10 +17,12 @@ export default function Section({ children, id }) {
           observer.disconnect();
         }
       },
-      { root, threshold: 0.35 },
+      {
+        threshold: 0.1,
+      },
     );
 
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(element);
 
     return () => observer.disconnect();
   }, []);
@@ -27,7 +31,7 @@ export default function Section({ children, id }) {
     <section
       ref={ref}
       id={id}
-      className={`snap-start py-12 md:min-h-full pt-12 md:pt-8 ${
+      className={`scroll-mt-32 py-12 pt-12 md:pt-8 ${
         visible ? "animate-fade" : "opacity-0"
       }`}
     >

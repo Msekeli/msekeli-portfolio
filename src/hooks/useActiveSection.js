@@ -4,47 +4,56 @@ export default function useActiveSection(ids) {
   const [activeId, setActiveId] = useState(ids[0]);
 
   useEffect(() => {
-    // Callbacks only report entries whose ratio just crossed a threshold,
-    // not every observed section — so we keep a running record of each
-    // section's last-known ratio and always pick the best across all of
-    // them, instead of only the ones that happened to change this time.
-    const ratios = new Map(ids.map((id) => [id, 0]));
+    let frameId = null;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          ratios.set(
-            entry.target.id,
-            entry.isIntersecting ? entry.intersectionRatio : 0,
-          );
-        });
+    const updateActiveSection = () => {
+      frameId = null;
 
-        let bestId = null;
-        let bestRatio = 0;
+      const headerOffset = 120;
+      const referencePosition = headerOffset;
 
-        ratios.forEach((ratio, id) => {
-          if (ratio > bestRatio) {
-            bestRatio = ratio;
-            bestId = id;
-          }
-        });
+      let closestId = ids[0];
+      let closestDistance = Infinity;
 
-        if (bestId) {
-          setActiveId(bestId);
+      for (const id of ids) {
+        const element = document.getElementById(id);
+
+        if (!element) continue;
+
+        const distance = Math.abs(
+          element.getBoundingClientRect().top - referencePosition,
+        );
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestId = id;
         }
-      },
-      {
-        root: document.getElementById("scroll-container"),
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-      },
-    );
+      }
 
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+      setActiveId((currentId) =>
+        currentId === closestId ? currentId : closestId,
+      );
+    };
 
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      if (frameId !== null) return;
+
+      frameId = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      if (frameId !== null) {
+        cancelAnimationFrame(frameId);
+      }
+
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, [ids]);
 
   return activeId;

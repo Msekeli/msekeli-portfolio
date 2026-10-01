@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import MobileNavigation from "../components/MobileNavigation";
 import Footer from "../components/Footer";
+import AppBackground from "../components/AppBackground";
 
 import Hero from "../sections/Hero";
 import About from "../sections/About";
@@ -13,22 +14,26 @@ import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <Navigation />
+    <div className="relative isolate min-h-screen">
+      <AppBackground />
 
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
+      <div className="relative z-10">
+        <Header />
+        <Navigation />
 
-      <Footer />
-      <MobileNavigation />
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+        </main>
+
+        <Footer />
+        <MobileNavigation />
+      </div>
 
       <Analytics />
-    </>
+    </div>
   );
 }
