@@ -1,6 +1,6 @@
 import Hero from "../sections/Hero";
 import About from "../sections/About";
-import Certificates from "../sections/Certificates";
+import Skills from "../sections/Skills";
 import Projects from "../sections/Projects";
 import Contact from "../sections/Contact";
 import { Analytics } from "@vercel/analytics/react";
@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Hero />
       <About />
-      <Certificates />
+      <Skills />
       <Projects />
       <Contact />
       <Analytics />
