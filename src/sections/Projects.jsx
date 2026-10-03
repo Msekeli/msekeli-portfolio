@@ -9,7 +9,6 @@ import projects from "../data/projects.json";
 
 export default function Projects() {
   const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState("next");
   const [perPage, setPerPage] = useState(2);
 
   const total = projects.length;
@@ -33,14 +32,12 @@ export default function Projects() {
 
   const next = () => {
     if (index + perPage < total) {
-      setDirection("next");
       setIndex(index + perPage);
     }
   };
 
   const prev = () => {
     if (index - perPage >= 0) {
-      setDirection("prev");
       setIndex(index - perPage);
     }
   };
@@ -48,7 +45,7 @@ export default function Projects() {
   return (
     <Section id="projects">
       {" "}
-      <div className="stagger flex flex-col">
+      <div className="flex flex-col">
         {" "}
         <div className="flex items-center justify-between mb-1">
           {" "}
@@ -75,13 +72,7 @@ export default function Projects() {
           </button>
         </div>
         <div className="border-b border-borderColor mb-4"></div>
-        <div
-          key={index}
-          className={`
-        grid grid-cols-1 md:grid-cols-2 gap-6
-        ${direction === "next" ? "animate-slide-left" : "animate-slide-right"}
-      `}
-        >
+        <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {visible.map((project) => (
             <Surface
               key={project.title}
@@ -108,7 +99,7 @@ export default function Projects() {
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
-                    className="text-xs px-2 py-1 border border-gold-main/30 rounded transition group-hover:border-gold-main/60 group-hover:text-gold-soft"
+                      className="text-xs px-2 py-1 border border-gold-main/30 rounded transition group-hover:border-gold-main/60 group-hover:text-gold-soft"
                     >
                       {tech}
                     </span>

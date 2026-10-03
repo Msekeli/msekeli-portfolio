@@ -5,7 +5,6 @@
 @import "./styles/base.css";
 @import "./styles/components.css";
 
-@import "./styles/animations/fade.css";
 @import "./styles/animations/slide.css";
 @import "./styles/animations/scale.css";
 

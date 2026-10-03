@@ -10,7 +10,7 @@ export default function Hero() {
     <Section id="home">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:pt-8 items-center">
         {/* Text */}
-        <div className="space-y-6 max-w-xl stagger">
+        <div className="space-y-6 max-w-xl">
           <Text variant="secondary">{hero.greeting}</Text>
 
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold gold-accent leading-tight">
@@ -30,7 +30,7 @@ export default function Hero() {
 
         {/* Image */}
         <div className="w-full lg:max-w-xl lg:ml-auto">
-          <Surface noPadding className="gold-glow animate-fade overflow-hidden">
+          <Surface noPadding className="gold-glow overflow-hidden">
             <img
               src="/images/my-hero-img.webp"
               alt="Hero image"

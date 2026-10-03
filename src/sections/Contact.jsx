@@ -60,7 +60,7 @@ export default function Contact() {
     <Section id="contact">
       <SectionTitle>Contact</SectionTitle>
 
-      <div className="stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* LEFT: Contact form */}
         <Surface className="gold-glow surface-lift">
           <div className="space-y-6 ">

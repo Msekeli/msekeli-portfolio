@@ -36,7 +36,7 @@ export default function Skills() {
   }, [activeCert]);
 
   return (
-    <Section id="certificates">
+    <Section id="skills">
       <SectionTitle>Skills</SectionTitle>
 
       <div
@@ -46,7 +46,6 @@ export default function Skills() {
       >
         <div
           className="
-            stagger
             grid grid-cols-1 md:grid-cols-3
             gap-5
             max-w-6xl mx-auto

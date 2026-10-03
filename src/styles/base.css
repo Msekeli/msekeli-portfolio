@@ -160,10 +160,6 @@ small {
   scrollbar-width: thin;
   scrollbar-color: rgba(212, 175, 55, 0.35) transparent;
 }
-.animate-slide-up,
-.animate-fade {
-  opacity: 0;
-}
 .crafted-chip {
   display: inline-flex;
   align-items: center;
