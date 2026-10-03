@@ -1,5 +1,7 @@
 import {
   Play,
+  Pause,
+  ArrowLeft,
   Github,
   Home,
   User,
@@ -9,6 +11,8 @@ import {
   Linkedin,
   CalendarDays,
   Users,
+  X,
+  Image as ImageIcon,
 } from "lucide-react";
 
 // Explicit map (rather than `import * as Icons`) so unused lucide icons
@@ -16,6 +20,8 @@ import {
 // whenever a new icon name is referenced in JSX or data files.
 const icons = {
   Play,
+  Pause,
+  ArrowLeft,
   Github,
   Home,
   User,
@@ -25,9 +31,11 @@ const icons = {
   Linkedin,
   CalendarDays,
   Users,
+  X,
+  Image: ImageIcon,
 };
 
-export default function Icon({ name, className = "" }) {
+export default function Icon({ name, className = "", size }) {
   const LucideIcon = icons[name];
 
   if (!LucideIcon) {
@@ -37,5 +45,9 @@ export default function Icon({ name, className = "" }) {
     return null;
   }
 
-  return <LucideIcon className={`w-5 h-5 ${className}`} />;
+  if (size) {
+    return <LucideIcon size={size} className={className} aria-hidden="true" />;
+  }
+
+  return <LucideIcon className={`w-5 h-5 ${className}`} aria-hidden="true" />;
 }

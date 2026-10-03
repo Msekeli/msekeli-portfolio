@@ -1,7 +1,9 @@
 [
   {
+    "id": "interview-prep",
     "title": "Interview Prep",
-    "description": "AI-powered interview preparation platform built with Clean Architecture to simulate realistic job interviews based on a candidate's CV, target role, and company context. Generates tailored interview questions, evaluates responses, provides personalized feedback, tracks performance across interview sessions, and includes automated unit testing for core business logic.",
+    "description": "AI-powered interview preparation platform for realistic, role-specific interview practice based on a candidate's CV, target role, and company context.",
+    "frontend": "Next.js",
     "tech": [
       "Next.js",
       "TypeScript",
@@ -10,13 +12,57 @@
       "Azure Speech Services",
       "SQLite"
     ],
-    "demo": "https://www.youtube.com/watch?v=nx9n_ekBwrE",
+    "ai": true,
     "repo": "https://github.com/Msekeli/InterviewPrep.git",
-    "image": "/images/interview-session.svg"
+    "cover": "/images/interview-session.svg",
+    "screens": [
+      {
+        "title": "Interview setup",
+        "description": "Configure an interview session around the candidate's CV, target role, and preparation requirements.",
+        "tech": ["Next.js", "TypeScript", ".NET 9"],
+        "image": "/images/interview-session.svg",
+        "imagePosition": "50% 20%",
+        "imageScale": 1
+      },
+      {
+        "title": "Interview session",
+        "description": "Practise realistic interview questions through an interactive interview experience tailored to the selected role.",
+        "tech": ["Next.js", "Gemini API", "Azure Speech Services"],
+        "image": "/images/interview-session.svg",
+        "imagePosition": "50% 50%",
+        "imageScale": 1.05
+      },
+      {
+        "title": "AI feedback",
+        "description": "Responses are evaluated to provide personalised feedback that helps the candidate identify areas for improvement.",
+        "tech": ["Gemini API", "TypeScript", ".NET 9"],
+        "image": "/images/interview-session.svg",
+        "imagePosition": "65% 50%",
+        "imageScale": 1.1
+      },
+      {
+        "title": "Interview performance",
+        "description": "Interview sessions can be reviewed to help track preparation and performance across practice sessions.",
+        "tech": ["Next.js", "TypeScript", "SQLite"],
+        "image": "/images/interview-session.svg",
+        "imagePosition": "35% 70%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "AI-powered workflow",
+        "description": "The application combines the frontend, backend services, Gemini, and speech capabilities into one interview workflow.",
+        "tech": ["Next.js", "Gemini API", "Azure Speech Services"],
+        "image": "/images/interview-session.svg",
+        "imagePosition": "50% 80%",
+        "imageScale": 1
+      }
+    ]
   },
   {
+    "id": "spaza-stock-manager",
     "title": "Spaza Stock Manager",
-    "description": "Enterprise-style inventory management system for retail and spaza shops. Built with Clean Architecture, Azure SQL, stored procedures, supplier management, stock tracking, inventory valuation, operational dashboards, and unit-tested business workflows.",
+    "description": "Enterprise-style inventory management system for retail and spaza shops covering stock, suppliers, inventory value, and operational workflows.",
+    "frontend": "Blazor WASM",
     "tech": [
       "Blazor WebAssembly",
       ".NET 8",
@@ -25,13 +71,57 @@
       "Radzen",
       "Bootstrap"
     ],
-    "demo": "https://www.youtube.com/watch?v=HCuIlkI5fFY",
+    "ai": false,
     "repo": "https://github.com/Msekeli/InventoryLedger.git",
-    "image": "/images/inventory.png"
+    "cover": "/images/inventory.png",
+    "screens": [
+      {
+        "title": "Items and stock",
+        "description": "Manage inventory items and monitor current stock information through the main stock management workflow.",
+        "tech": ["Blazor WASM", ".NET 8", "Radzen"],
+        "image": "/images/inventory.png",
+        "imagePosition": "50% 20%",
+        "imageScale": 1
+      },
+      {
+        "title": "Supplier management",
+        "description": "The system includes supplier management as part of the broader inventory and retail workflow.",
+        "tech": ["Blazor WASM", ".NET 8", "Azure SQL"],
+        "image": "/images/inventory.png",
+        "imagePosition": "65% 40%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "Inventory value",
+        "description": "Inventory information can be used to understand the value represented by the current stock.",
+        "tech": [".NET 8", "Azure SQL", "Stored Procedures"],
+        "image": "/images/inventory.png",
+        "imagePosition": "35% 55%",
+        "imageScale": 1.12
+      },
+      {
+        "title": "Low-stock monitoring",
+        "description": "Low-stock information helps identify inventory that requires attention during day-to-day operations.",
+        "tech": ["Blazor WASM", "Radzen", "Azure SQL"],
+        "image": "/images/inventory.png",
+        "imagePosition": "70% 70%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "API documentation",
+        "description": "Swagger documentation exposes the backend API for items, stock, value, and low-stock endpoints.",
+        "tech": ["REST API", ".NET 8", "Swagger"],
+        "image": "/images/inventory.png",
+        "imagePosition": "50% 50%",
+        "imageScale": 1
+      }
+    ]
   },
   {
+    "id": "authentication-system",
     "title": "Authentication System",
-    "description": "Full-stack authentication platform providing secure user registration, login, JWT authentication, refresh token management, role-based authorization, protected routes, and unit-tested authentication workflows. Designed as the foundation for a future reusable identity platform.",
+    "description": "Full-stack authentication platform with secure registration, login, JWT authentication, refresh tokens, role-based authorization, and protected routes.",
+    "frontend": "React",
     "tech": [
       "React",
       ".NET 9",
@@ -40,32 +130,206 @@
       "REST API",
       "Tailwind CSS"
     ],
-    "demo": "",
+    "ai": false,
     "repo": "https://github.com/Msekeli/LoginSystem.git",
-    "image": "/images/login.webp"
+    "cover": "/images/login.webp",
+    "screens": [
+      {
+        "title": "Create account",
+        "description": "The authentication flow begins with secure user registration and account creation.",
+        "tech": ["React", ".NET 9", "PostgreSQL"],
+        "image": "/images/login.webp",
+        "imagePosition": "50% 20%",
+        "imageScale": 1
+      },
+      {
+        "title": "User login",
+        "description": "Users authenticate through the application's login flow before accessing protected functionality.",
+        "tech": ["React", "JWT", "Tailwind CSS"],
+        "image": "/images/login.webp",
+        "imagePosition": "60% 45%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "JWT authentication",
+        "description": "JWT authentication and refresh token management provide the foundation for persistent secure sessions.",
+        "tech": [".NET 9", "JWT", "REST API"],
+        "image": "/images/login.webp",
+        "imagePosition": "40% 55%",
+        "imageScale": 1.12
+      },
+      {
+        "title": "Role-based access",
+        "description": "Role-based authorization controls access to protected application routes and functionality.",
+        "tech": [".NET 9", "JWT", "PostgreSQL"],
+        "image": "/images/login.webp",
+        "imagePosition": "70% 70%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "Authentication API",
+        "description": "The backend exposes the authentication workflow through a REST API designed as a reusable identity foundation.",
+        "tech": ["REST API", ".NET 9", "PostgreSQL"],
+        "image": "/images/login.webp",
+        "imagePosition": "50% 80%",
+        "imageScale": 1
+      }
+    ]
   },
   {
+    "id": "smartwheel",
     "title": "SmartWheel",
-    "description": "Gamified rewards platform where users solve riddles to earn spins and win prizes. Features backend-controlled prize allocation, reward tracking, balance management, cooldown enforcement, Clean Architecture, and unit-tested business rules.",
+    "description": "Gamified rewards platform where users solve riddles, earn spins, and participate in a controlled prize and rewards system.",
+    "frontend": "React",
     "tech": ["React", ".NET 9", "SQLite", "Azure", "Tailwind CSS", "Vite"],
-    "demo": "https://www.youtube.com/watch?v=LSizr1bpCD8",
+    "ai": false,
     "repo": "https://github.com/Msekeli/SmartWheel2",
-    "image": "/images/smartwheel.webp"
+    "cover": "/images/smartwheel.webp",
+    "screens": [
+      {
+        "title": "Riddle challenge",
+        "description": "Users solve riddles as part of the gameplay loop before earning opportunities to spin the reward wheel.",
+        "tech": ["React", "Vite", "Tailwind CSS"],
+        "image": "/images/smartwheel.webp",
+        "imagePosition": "50% 20%",
+        "imageScale": 1
+      },
+      {
+        "title": "Prize wheel",
+        "description": "The wheel provides the central gamified interaction for awarding prizes and rewards.",
+        "tech": ["React", ".NET 9", "Tailwind CSS"],
+        "image": "/images/smartwheel.webp",
+        "imagePosition": "65% 45%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "Reward allocation",
+        "description": "Prize allocation is controlled by the backend rather than relying entirely on client-side behaviour.",
+        "tech": [".NET 9", "SQLite", "Azure"],
+        "image": "/images/smartwheel.webp",
+        "imagePosition": "35% 50%",
+        "imageScale": 1.12
+      },
+      {
+        "title": "Balance and rewards",
+        "description": "The platform tracks user balances and rewards as part of the overall gameplay experience.",
+        "tech": ["React", ".NET 9", "SQLite"],
+        "image": "/images/smartwheel.webp",
+        "imagePosition": "70% 70%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "Game rules",
+        "description": "Cooldown enforcement and business rules help control the reward flow and maintain consistent gameplay behaviour.",
+        "tech": [".NET 9", "SQLite", "Azure"],
+        "image": "/images/smartwheel.webp",
+        "imagePosition": "50% 80%",
+        "imageScale": 1
+      }
+    ]
   },
   {
+    "id": "event-reserve",
     "title": "EventReserve",
-    "description": "Event reservation platform that allows users to create, manage, and track event bookings through a responsive React frontend and ASP.NET Core API. Features reservation management, event scheduling, validation, and RESTful API integration.",
+    "description": "Event reservation platform for creating, managing, and tracking event bookings through a responsive React frontend and ASP.NET Core API.",
+    "frontend": "React",
     "tech": ["React", ".NET 9", "Tailwind CSS", "REST API"],
-    "demo": "https://www.youtube.com/watch?v=aGux4z_jVuA",
+    "ai": false,
     "repo": "https://github.com/Msekeli/EventReserve.git",
-    "image": "/images/event.webp"
+    "cover": "/images/event.webp",
+    "screens": [
+      {
+        "title": "Event management",
+        "description": "Create and manage events through the platform's responsive event management workflow.",
+        "tech": ["React", ".NET 9", "Tailwind CSS"],
+        "image": "/images/event.webp",
+        "imagePosition": "50% 20%",
+        "imageScale": 1
+      },
+      {
+        "title": "Reservations",
+        "description": "Users can create and manage reservations associated with scheduled events.",
+        "tech": ["React", ".NET 9", "REST API"],
+        "image": "/images/event.webp",
+        "imagePosition": "65% 40%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "Booking management",
+        "description": "Reservation information can be tracked and managed through the application's booking workflow.",
+        "tech": ["React", "Tailwind CSS", "REST API"],
+        "image": "/images/event.webp",
+        "imagePosition": "35% 55%",
+        "imageScale": 1.12
+      },
+      {
+        "title": "Validation",
+        "description": "Validation helps keep event and reservation information consistent throughout the booking process.",
+        "tech": [".NET 9", "REST API", "React"],
+        "image": "/images/event.webp",
+        "imagePosition": "70% 70%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "API integration",
+        "description": "The React frontend communicates with the ASP.NET Core API through the application's RESTful integration.",
+        "tech": ["React", ".NET 9", "REST API"],
+        "image": "/images/event.webp",
+        "imagePosition": "50% 80%",
+        "imageScale": 1
+      }
+    ]
   },
   {
+    "id": "course-enrollment-app",
     "title": "Course Enrollment App",
-    "description": "Full-stack course enrollment platform featuring JWT authentication, course management, enrollment workflows, and a Clean Architecture approach using Blazor and ASP.NET Core.",
+    "description": "Full-stack course enrollment platform featuring authentication, course management, enrollment workflows, and Clean Architecture.",
+    "frontend": "Blazor WASM",
     "tech": ["Blazor WebAssembly", ".NET", "Entity Framework Core", "JWT"],
-    "demo": "",
+    "ai": false,
     "repo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
-    "image": "/images/enrol.webp"
+    "cover": "/images/enrol.webp",
+    "screens": [
+      {
+        "title": "Course list",
+        "description": "Browse available courses through the application's course management interface.",
+        "tech": ["Blazor WASM", ".NET", "Entity Framework Core"],
+        "image": "/images/enrol.webp",
+        "imagePosition": "50% 20%",
+        "imageScale": 1
+      },
+      {
+        "title": "Course management",
+        "description": "Course information is managed through the full-stack application and its backend services.",
+        "tech": ["Blazor WASM", ".NET", "Entity Framework Core"],
+        "image": "/images/enrol.webp",
+        "imagePosition": "65% 40%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "Enrollment workflow",
+        "description": "Students can participate in course enrollment workflows through the application.",
+        "tech": ["Blazor WASM", ".NET", "JWT"],
+        "image": "/images/enrol.webp",
+        "imagePosition": "35% 55%",
+        "imageScale": 1.12
+      },
+      {
+        "title": "Authentication",
+        "description": "JWT authentication provides secure access to the application's protected functionality.",
+        "tech": ["JWT", ".NET", "Blazor WASM"],
+        "image": "/images/enrol.webp",
+        "imagePosition": "70% 70%",
+        "imageScale": 1.08
+      },
+      {
+        "title": "Backend integration",
+        "description": "The frontend and backend work together to support course and enrollment operations.",
+        "tech": [".NET", "Entity Framework Core", "JWT"],
+        "image": "/images/enrol.webp",
+        "imagePosition": "50% 80%",
+        "imageScale": 1
+      }
+    ]
   }
 ]

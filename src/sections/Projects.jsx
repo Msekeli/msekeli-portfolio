@@ -1,150 +1,178 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
-import Text from "../components/Text";
 import Surface from "../components/Surface";
-import Button from "../components/Button";
 import Icon from "../components/Icon";
+import Button from "../components/Button";
+import ProjectViewer from "../components/ProjectViewer";
 import projects from "../data/projects.json";
 
-export default function Projects() {
-  const [index, setIndex] = useState(0);
-  const [perPage, setPerPage] = useState(2);
+const MAX_TAGS = 3;
 
-  const total = projects.length;
+// Card tags: frontend first, then the rest of the stack. A project can
+// override this with its own short list by adding "cardTech" in projects.json.
+function getCardTags(project) {
+  if (project.cardTech) return project.cardTech;
+  if (!project.frontend) return project.tech;
+
+  const frontendKey = project.frontend.split(" ")[0];
+  const rest = project.tech.filter((tech) => !tech.startsWith(frontendKey));
+
+  return [project.frontend, ...rest];
+}
+
+export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const previousScrollY = useRef(0);
 
   useEffect(() => {
-    const update = () => {
-      if (window.innerWidth < 768) {
-        setPerPage(1);
-      } else {
-        setPerPage(2);
-      }
+    const handlePopState = () => {
+      setSelectedProject(null);
+
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: previousScrollY.current,
+          behavior: "instant",
+        });
+      });
     };
 
-    update();
-    window.addEventListener("resize", update);
+    window.addEventListener("popstate", handlePopState);
 
-    return () => window.removeEventListener("resize", update);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
   }, []);
 
-  const visible = projects.slice(index, index + perPage);
+  const openProjectViewer = (project) => {
+    previousScrollY.current = window.scrollY;
 
-  const next = () => {
-    if (index + perPage < total) {
-      setIndex(index + perPage);
-    }
+    window.history.pushState({ projectViewer: true }, "", window.location.href);
+
+    setSelectedProject(project);
   };
 
-  const prev = () => {
-    if (index - perPage >= 0) {
-      setIndex(index - perPage);
+  const closeProjectViewer = () => {
+    if (window.history.state?.projectViewer) {
+      window.history.back();
+      return;
     }
+
+    setSelectedProject(null);
   };
 
   return (
-    <Section id="projects">
-      {" "}
-      <div className="flex flex-col">
-        {" "}
-        <div className="flex items-center justify-between mb-1">
-          {" "}
+    <>
+      <Section id="projects">
+        <div className="flex flex-col">
           <SectionTitle>Projects</SectionTitle>
-          <span className="text-sm md:text-lg font-bold text-text-white">
-            {index + 1}-{Math.min(index + perPage, total)} of {total}
-          </span>
-        </div>
-        <div className="flex justify-between mb-3">
-          <button
-            onClick={prev}
-            disabled={index === 0}
-            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
-          >
-            ← Previous
-          </button>
 
-          <button
-            onClick={next}
-            disabled={index + perPage >= total}
-            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
-          >
-            Next →
-          </button>
-        </div>
-        <div className="border-b border-borderColor mb-4"></div>
-        <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {visible.map((project) => (
-            <Surface
-              key={project.title}
-              elevated
-              className="group flex flex-col gold-glow surface-lift transition"
-            >
-              <div className="aspect-video overflow-hidden rounded-lg">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 image-render-crisp"
-                  style={{ imageRendering: "auto" }}
-                />
-              </div>
+          {/*
+            On xl screens the grid is sized to the viewport, with a minimum
+            height so cards never get cramped. Adjust the 13.5rem offset (nav
+            bar + title + section padding) if the bottom row sits too high or
+            too low. The negative top margin pulls the grid up under the title;
+            remove it if SectionTitle's spacing changes.
+          */}
+          <div className="-mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 xl:h-[max(40rem,calc(100svh-13.5rem))] xl:grid-cols-3 xl:grid-rows-2">
+            {projects.map((project) => {
+              const tags = getCardTags(project);
+              const visibleTags = tags.slice(0, MAX_TAGS);
+              const remainingTags = tags.length - visibleTags.length;
 
-              <div className="mt-3 space-y-3 flex flex-col grow">
-                <h3 className="text-sm font-medium text-text-primary">
-                  {project.title}
-                </h3>
-
-                <div className="flex flex-wrap gap-1">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-1 border border-gold-main/30 rounded transition group-hover:border-gold-main/60 group-hover:text-gold-soft"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <Text
-                  variant="secondary"
-                  className="text-sm leading-relaxed line-clamp-3"
+              return (
+                <Surface
+                  key={project.id}
+                  elevated
+                  noPadding
+                  className="group flex h-full min-h-0 flex-col overflow-hidden transition duration-300 hover:-translate-y-0.5"
                 >
-                  {project.description}
-                </Text>
+                  <div className="relative aspect-[16/7] overflow-hidden rounded-t-2xl xl:aspect-auto xl:min-h-28 xl:flex-1">
+                    <img
+                      src={project.cover}
+                      alt={`${project.title} project screen`}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover object-top image-render-crisp transition-transform duration-500 ease-out group-hover:scale-[1.025]"
+                    />
 
-                <div className="flex flex-wrap gap-2 pt-2 mt-auto">
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button variant="primary">
-                        <Icon name="Play" />
-                        Watch Demo
-                      </Button>
-                    </a>
-                  )}
+                    {project.ai && (
+                      <span className="absolute right-3 top-3 rounded-md border border-gold-main px-2.5 py-1 text-sm font-semibold text-gold-main">
+                        AI
+                      </span>
+                    )}
+                  </div>
 
-                  {project.repo && (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button variant="secondary">
-                        <Icon name="Github" />
-                        Source Code
+                  <div className="flex shrink-0 flex-col gap-2.5 p-4">
+                    <h3 className="text-lg font-semibold leading-tight text-text-primary">
+                      {project.title}
+                    </h3>
+
+                    <p className="line-clamp-2 min-h-10 text-sm leading-5 text-text-secondary">
+                      {project.summary ?? project.description}
+                    </p>
+
+                    <ul className="flex flex-nowrap gap-1.5 overflow-hidden">
+                      {visibleTags.map((tag, index) => (
+                        <li
+                          key={tag}
+                          className={`whitespace-nowrap rounded-md border px-2.5 py-1 text-xs font-medium ${
+                            index === 0
+                              ? "border-gold-main/60 bg-gold-main/10 text-gold-main"
+                              : "border-transparent bg-text-primary/5 text-text-secondary"
+                          }`}
+                        >
+                          {tag}
+                        </li>
+                      ))}
+
+                      {remainingTags > 0 && (
+                        <li className="whitespace-nowrap rounded-md border border-dashed border-borderColor px-2.5 py-1 text-xs text-text-secondary">
+                          +{remainingTags}
+                        </li>
+                      )}
+                    </ul>
+
+                    <div className="flex gap-2 pt-1">
+                      <Button
+                        type="button"
+                        variant="primary"
+                        onClick={() => openProjectViewer(project)}
+                        className="flex-1 justify-center"
+                      >
+                        <Icon name="Image" />
+                        <span>View screens</span>
                       </Button>
-                    </a>
-                  )}
-                </div>
-              </div>
-            </Surface>
-          ))}
+
+                      {project.repo && (
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          onClick={() =>
+                            window.open(
+                              project.repo,
+                              "_blank",
+                              "noopener,noreferrer",
+                            )
+                          }
+                          aria-label={`${project.title} source code`}
+                          className="border border-borderColor px-3! hover:border-gold-main"
+                        >
+                          <Icon name="Github" />
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </Surface>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+
+      {selectedProject && (
+        <ProjectViewer project={selectedProject} onClose={closeProjectViewer} />
+      )}
+    </>
   );
 }
