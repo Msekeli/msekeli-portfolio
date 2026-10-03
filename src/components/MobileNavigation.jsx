@@ -3,18 +3,7 @@ import useActiveSection from "../hooks/useActiveSection";
 import navItems, { navIds } from "../data/nav";
 
 export default function MobileNavigation() {
-  const activeId = useActiveSection(navIds);
-
-  const handleClick = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    el.scrollIntoView({
-      behavior: "smooth",
-    });
-
-    history.replaceState(null, "", location.pathname);
-  };
+  const [activeId, setActiveId] = useActiveSection(navIds);
 
   return (
     <nav className="fixed bottom-0 inset-x-0 md:hidden h-16 surface border-t border-white/5 gold-glow">
@@ -23,16 +12,18 @@ export default function MobileNavigation() {
           const isActive = activeId === id;
 
           return (
-            <button
+            <a
               key={id}
-              onClick={() => handleClick(id)}
+              href={`#${id}`}
+              onClick={() => setActiveId(id)}
+              aria-current={isActive ? "location" : undefined}
               className={`flex flex-col items-center cursor-pointer ${
                 isActive ? "text-gold-main" : "text-text-muted"
               }`}
             >
               <Icon name={icon} />
               <span className="text-xs mt-1">{label}</span>
-            </button>
+            </a>
           );
         })}
       </div>
