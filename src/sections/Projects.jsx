@@ -9,8 +9,10 @@ import projects from "../data/projects.json";
 
 const MAX_TAGS = 3;
 
-// Card tags: frontend first, then the rest of the stack. A project can
-// override this with its own short list by adding "cardTech" in projects.json.
+// Card tags show the core stack only (frontend, backend, database), never a
+// "+N" overflow. Set "cardTech" in projects.json to choose them; otherwise the
+// frontend plus the first two other technologies are used. The full stack is
+// listed in the project viewer.
 function getCardTags(project) {
   if (project.cardTech) return project.cardTech;
   if (!project.frontend) return project.tech;
@@ -78,7 +80,6 @@ export default function Projects() {
             {projects.map((project) => {
               const tags = getCardTags(project);
               const visibleTags = tags.slice(0, MAX_TAGS);
-              const remainingTags = tags.length - visibleTags.length;
 
               return (
                 <Surface
@@ -125,12 +126,6 @@ export default function Projects() {
                           {tag}
                         </li>
                       ))}
-
-                      {remainingTags > 0 && (
-                        <li className="whitespace-nowrap rounded-md border border-dashed border-borderColor px-2.5 py-1 text-xs text-text-secondary">
-                          +{remainingTags}
-                        </li>
-                      )}
                     </ul>
 
                     <div className="flex gap-2 pt-1">

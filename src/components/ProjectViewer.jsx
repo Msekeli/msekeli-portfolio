@@ -364,6 +364,17 @@ export default function ProjectViewer({ project, onClose }) {
                 ))}
               </div>
 
+              {project.tech?.length > 0 && (
+                <div className="mt-2 border-t border-borderColor pt-4">
+                  <p className="text-xs font-medium uppercase tracking-widest text-text-muted">
+                    Built with
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-text-secondary">
+                    {project.tech.join(" · ")}
+                  </p>
+                </div>
+              )}
+
               {project.repo && (
                 <div className="mt-auto pt-4">
                   <Button

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 48" role="img" aria-labelledby="title desc">
+  <title id="title">Next.js</title>
+  <desc id="desc">Next.js wordmark</desc>
+  <text
+    x="2"
+    y="36"
+    fill="#FFFFFF"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="34"
+    font-weight="700"
+    letter-spacing="-1.5"
+  >Next.js</text>
+</svg>
