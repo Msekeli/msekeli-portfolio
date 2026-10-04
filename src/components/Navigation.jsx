@@ -1,10 +1,21 @@
 import { Fragment } from "react";
 import Icon from "../components/Icon";
-import useActiveSection from "../hooks/useActiveSection";
-import navItems, { navIds } from "../data/nav";
+import navItems from "../data/nav";
 
-export default function Navigation() {
-  const [activeId, setActiveId] = useActiveSection(navIds);
+export default function Navigation({ activeId, setActiveId }) {
+  const handleClick = (id) => {
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    // Instant visual feedback
+    setActiveId(id);
+
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
     <aside
@@ -25,31 +36,34 @@ export default function Navigation() {
           return (
             <Fragment key={id}>
               {index > 0 && (
-                <div aria-hidden="true" className="mx-3 h-px bg-gold-main/12" />
+                <div
+                  aria-hidden="true"
+                  className="mx-3 mb-2 h-px bg-gold-main/12"
+                />
               )}
 
-              <a
-                href={`#${id}`}
-                onClick={() => setActiveId(id)}
+              <button
+                type="button"
+                onClick={() => handleClick(id)}
                 aria-current={isActive ? "location" : undefined}
                 className={`
-    flex h-[74px] w-[72px] cursor-pointer flex-col items-center justify-center gap-2
-    rounded-[14px] border text-xs
-    transition-colors duration-150
-    active:scale-95
-    focus-visible:outline-2
-    focus-visible:outline-offset-2
-    focus-visible:outline-gold-main
-    ${
-      isActive
-        ? "border-gold-main bg-gold-main/10 font-medium text-gold-main"
-        : "border-transparent text-text-secondary hover:border-gold-main/30 hover:bg-gold-main/5 hover:text-text-primary"
-    }
-  `}
+                  flex h-[74px] w-[72px] cursor-pointer flex-col
+                  items-center justify-center gap-2 rounded-[14px]
+                  border text-xs transition-colors duration-150
+                  active:scale-95
+                  focus-visible:outline-2
+                  focus-visible:outline-offset-2
+                  focus-visible:outline-gold-main
+                  ${
+                    isActive
+                      ? "border-gold-main bg-gold-main/10 font-medium text-gold-main"
+                      : "border-transparent text-text-secondary hover:border-gold-main/30 hover:bg-gold-main/5 hover:text-text-primary"
+                  }
+                `}
               >
                 <Icon name={icon} size={24} />
                 <span className="leading-none">{label}</span>
-              </a>
+              </button>
             </Fragment>
           );
         })}

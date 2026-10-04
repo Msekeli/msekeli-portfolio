@@ -11,15 +11,19 @@ import Projects from "../sections/Projects";
 import Contact from "../sections/Contact";
 
 import { Analytics } from "@vercel/analytics/react";
+import useActiveSection from "../hooks/useActiveSection";
+import { navIds } from "../data/nav";
 
 export default function Home() {
+  const [activeId, setActiveId] = useActiveSection(navIds);
+
   return (
-    <div className="relative isolate min-h-screen">
+    <div className="min-h-screen">
       <AppBackground />
 
       <div className="relative z-10 pt-14">
         <Header />
-        <Navigation />
+        <Navigation activeId={activeId} setActiveId={setActiveId} />
 
         <main>
           <Hero />
@@ -30,7 +34,7 @@ export default function Home() {
         </main>
 
         <Footer />
-        <MobileNavigation />
+        <MobileNavigation activeId={activeId} setActiveId={setActiveId} />
       </div>
 
       <Analytics />

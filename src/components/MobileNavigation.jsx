@@ -1,9 +1,20 @@
 import Icon from "../components/Icon";
-import useActiveSection from "../hooks/useActiveSection";
-import navItems, { navIds } from "../data/nav";
+import navItems from "../data/nav";
 
-export default function MobileNavigation() {
-  const [activeId, setActiveId] = useActiveSection(navIds);
+export default function MobileNavigation({ activeId, setActiveId }) {
+  const handleClick = (id) => {
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    // Instant visual feedback
+    setActiveId(id);
+
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
     <nav className="fixed bottom-0 inset-x-0 md:hidden h-16 surface border-t border-white/5 gold-glow">
@@ -12,10 +23,9 @@ export default function MobileNavigation() {
           const isActive = activeId === id;
 
           return (
-            <a
+            <button
               key={id}
-              href={`#${id}`}
-              onClick={() => setActiveId(id)}
+              onClick={() => handleClick(id)}
               aria-current={isActive ? "location" : undefined}
               className={`flex flex-col items-center cursor-pointer ${
                 isActive ? "text-gold-main" : "text-text-muted"
@@ -23,7 +33,7 @@ export default function MobileNavigation() {
             >
               <Icon name={icon} />
               <span className="text-xs mt-1">{label}</span>
-            </a>
+            </button>
           );
         })}
       </div>

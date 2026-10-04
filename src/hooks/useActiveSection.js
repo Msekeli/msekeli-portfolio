@@ -10,14 +10,30 @@ export default function useActiveSection(ids) {
 
     if (!sections.length) return;
 
+    // Track intersection states of all observed sections
+    const intersectionMap = new Map();
+
     const observer = new IntersectionObserver(
       (entries) => {
+        entries.forEach((entry) => {
+          intersectionMap.set(entry.target.id, entry.isIntersecting);
+        });
+
+        // Find the intersecting section with the highest intersection ratio
+        // among those currently marked as intersecting in our map
         const visibleSections = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visibleSections[0]) {
+        if (visibleSections.length > 0) {
           setActiveId(visibleSections[0].target.id);
+        } else {
+          // Fallback: if no one just changed to intersecting, 
+          // find the one in the map that is still intersecting
+          const currentIntersecting = ids.find(id => intersectionMap.get(id));
+          if (currentIntersecting) {
+            setActiveId(currentIntersecting);
+          }
         }
       },
       {
