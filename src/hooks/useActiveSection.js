@@ -10,36 +10,24 @@ export default function useActiveSection(ids) {
 
     if (!sections.length) return;
 
-    // Track intersection states of all observed sections
-    const intersectionMap = new Map();
-
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          intersectionMap.set(entry.target.id, entry.isIntersecting);
-        });
-
-        // Find the intersecting section with the highest intersection ratio
-        // among those currently marked as intersecting in our map
-        const visibleSections = entries
+        // Find the section that currently occupies the most area of the viewport
+        // We use the entries provided by the observer, but we also check
+        // for the most prominent intersecting section globally.
+        const intersecting = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visibleSections.length > 0) {
-          setActiveId(visibleSections[0].target.id);
-        } else {
-          // Fallback: if no one just changed to intersecting, 
-          // find the one in the map that is still intersecting
-          const currentIntersecting = ids.find(id => intersectionMap.get(id));
-          if (currentIntersecting) {
-            setActiveId(currentIntersecting);
-          }
+        if (intersecting.length > 0) {
+          setActiveId(intersecting[0].target.id);
         }
       },
       {
         root: null,
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
+        // Adjust margin to create a "sweet spot" in the center of the viewport
+        rootMargin: "-10% 0px -10% 0px",
+        threshold: [0, 0.1, 0.2, 0.5, 1],
       },
     );
 

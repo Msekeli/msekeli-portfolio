@@ -1,31 +1,59 @@
-{
-  "frontend": [
-    "React.js",
-    "Blazor",
-    "TypeScript",
-    "JavaScript",
-    "Tailwind CSS",
-    "Bootstrap",
-    "HTML5 / CSS3"
-  ],
-  "backend": [
-    "C#",
-    "ASP.NET Core",
-    ".NET 6 – 10",
-    "Entity Framework Core",
-    "REST APIs",
-    "SQL Server",
-    "PostgreSQL",
-    "SQLite"
-  ],
-  "cloud": [
-    "Azure",
-    "Azure Static Web Apps",
-    "Azure Functions",
-    "AWS",
-    "Azure DevOps",
-    "Git / GitHub",
-    "Postman",
-    "Visual Studio"
-  ]
-}
+[
+  {
+    "title": "Frontend",
+    "skills": [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Blazor",
+      "Tailwind CSS",
+      "Bootstrap",
+      "HTML5 / CSS3"
+    ]
+  },
+  {
+    "title": "Backend & Data",
+    "skills": [
+      "C#",
+      "ASP.NET Core",
+      ".NET 6 – 10",
+      "Entity Framework Core",
+      "REST APIs",
+      "JWT / RBAC",
+      "SQL Server",
+      "PostgreSQL",
+      "SQLite"
+    ]
+  },
+  {
+    "title": "Cloud & DevOps",
+    "skills": [
+      "Azure",
+      "Azure Static Web Apps",
+      "Azure Functions",
+      "Azure DevOps",
+      "AWS",
+      "Docker",
+      "CI/CD"
+    ]
+  },
+  {
+    "title": "Practices",
+    "skills": ["Clean Architecture", "Unit Testing (xUnit)", "Agile / Scrum"]
+  },
+  {
+    "title": "Tools",
+    "skills": ["Git / GitHub", "Visual Studio", "VS Code", "Postman", "Figma"]
+  },
+  {
+    "title": "AI",
+    "skills": [
+      "GitHub Copilot",
+      "Claude Code",
+      "ChatGPT",
+      "Google Gemini API",
+      "Azure Speech Services"
+    ]
+  }
+]

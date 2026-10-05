@@ -39,66 +39,47 @@ export default function Skills() {
     <Section id="skills">
       <SectionTitle>Skills</SectionTitle>
 
+      {/* Fills whatever height the Section leaves under the title. */}
       <div
-        className={
-          activeCert ? "blur-sm pointer-events-none transition" : "transition"
-        }
+        className={`flex flex-1 min-h-0 flex-col gap-4 transition ${
+          activeCert ? "blur-sm pointer-events-none" : ""
+        }`}
       >
-        <div
-          className="
-            grid grid-cols-1 md:grid-cols-3
-            gap-5
-            max-w-6xl mx-auto
-            mb-15
-          "
+        {/* Skills: one row per category, every skill visible.
+            If the list ever outgrows the height, this area scrolls
+            inside itself instead of overflowing the Section. */}
+        <Surface
+          noPadding
+          className="gold-glow flex-1 min-h-0 md:overflow-hidden"
         >
-          <Surface className="gold-glow surface-lift p-10">
-            <h3 className="text-base font-semibold mb-2">Frontend</h3>
+          <div className="flex flex-col px-6 py-1 md:h-full md:overflow-y-auto">
+            {skills.map((group) => (
+              <div
+                key={group.title}
+                className="grid flex-auto grid-cols-1 items-center gap-2 border-t border-white/10 py-2 first:border-t-0 md:grid-cols-6 md:gap-4"
+              >
+                <h3 className="text-sm font-semibold text-gold-main md:col-span-1">
+                  {group.title}
+                </h3>
 
-            <div className="flex flex-wrap gap-2">
-              {skills.frontend.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 text-xs rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-gold-main/15 hover:text-gold-soft"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </Surface>
+                <ul className="flex flex-wrap gap-1.5 md:col-span-5">
+                  {group.skills.map((skill) => (
+                    <li
+                      key={skill}
+                      className="px-3 py-1 text-xs rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-gold-main/15 hover:text-gold-soft"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Surface>
 
-          <Surface className="gold-glow surface-lift p-10">
-            <h3 className="text-base font-semibold mb-2">Backend & Data</h3>
-
-            <div className="flex flex-wrap gap-2">
-              {skills.backend.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 text-xs rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-gold-main/15 hover:text-gold-soft"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </Surface>
-
-          <Surface className="gold-glow surface-lift p-10">
-            <h3 className="text-base font-semibold mb-2">Cloud & Tools</h3>
-
-            <div className="flex flex-wrap gap-2">
-              {skills.cloud.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 text-xs rounded-full bg-white/10 transition hover:-translate-y-0.5 hover:bg-gold-main/15 hover:text-gold-soft"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </Surface>
+        <div className="shrink-0">
+          <CertificatesSlider onSelect={setActiveCert} paused={!!activeCert} />
         </div>
-
-        <CertificatesSlider onSelect={setActiveCert} paused={!!activeCert} />
       </div>
 
       {activeCert &&
