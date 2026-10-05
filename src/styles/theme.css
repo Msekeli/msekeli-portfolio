@@ -43,3 +43,12 @@
     transparent 2px
   );
 }
+
+:root {
+  /* ========= TYPOGRAPHY ========= */
+
+  --tracking-body: 0.015em;
+  --tracking-heading: 0.02em;
+  --tracking-ui: 0.025em;
+  --tracking-emphasis: 0.04em;
+}

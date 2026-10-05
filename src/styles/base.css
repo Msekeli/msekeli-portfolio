@@ -30,7 +30,26 @@ body {
 #root {
   min-height: 100%;
 }
+/* ========= TYPOGRAPHY ========= */
 
+body {
+  letter-spacing: var(--tracking-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: var(--tracking-heading);
+}
+
+button,
+nav,
+label {
+  letter-spacing: var(--tracking-ui);
+}
 .app-background {
   position: fixed;
   inset: 0;

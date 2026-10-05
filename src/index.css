@@ -28,3 +28,51 @@
   backface-visibility: hidden;
   transform: translateZ(0);
 }
+/* One section at a time on desktop. Below 768px sections scroll normally. */
+@media (min-width: 768px) {
+  .pager {
+    position: relative;
+    height: calc(100vh - 3.5rem);
+    overflow: hidden;
+  }
+
+  .pager > section {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Leaving: fade out first, then hide. */
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      visibility 0s linear 0.22s;
+  }
+
+  .pager > section[data-pos="before"] {
+    transform: translateY(-22px);
+  }
+
+  .pager > section[data-pos="after"] {
+    transform: translateY(22px);
+  }
+
+  .pager > section[data-pos="active"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    /* Arriving: wait for the old one to leave, then fade in. */
+    transition:
+      opacity 0.35s ease 0.23s,
+      transform 0.35s ease 0.23s,
+      visibility 0s linear 0.23s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pager > section,
+  .pager > section[data-pos="active"] {
+    transition: none;
+  }
+}

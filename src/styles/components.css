@@ -67,14 +67,13 @@
 
 .gold-accent {
   color: var(--gold-main);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--tracking-emphasis);
 }
 
 /* ========= SECTION TITLES ========= */
-
 .section-title {
   color: var(--gold-main);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--tracking-emphasis);
 }
 
 .section-title-soft {

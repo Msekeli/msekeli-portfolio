@@ -3,18 +3,15 @@ import Icon from "../components/Icon";
 import navItems from "../data/nav";
 
 export default function Navigation({ activeId, setActiveId }) {
+  // This sidebar is desktop only. Desktop shows one section at a time, so a
+  // click just switches the active section.
   const handleClick = (id) => {
-    const element = document.getElementById(id);
-
-    if (!element) return;
-
-    // Instant visual feedback
     setActiveId(id);
 
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    // If the page was scrolled down to the footer, come back to the top.
+    if (window.scrollY > 0) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (

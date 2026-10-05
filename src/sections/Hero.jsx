@@ -6,7 +6,7 @@ import HeroStatBar from "../components/HeroStatBar";
 import TechStrip from "../components/TechStrip";
 import hero from "../data/hero.json";
 
-export default function Hero() {
+export default function Hero({ setActiveId }) {
   return (
     <Section id="home">
       <div className="grid grid-cols-1 items-center gap-8 md:pt-8 lg:grid-cols-2">
@@ -30,9 +30,7 @@ export default function Hero() {
 
             <Text className="max-w-lg">{hero.description}</Text>
 
-            <div className="pt-2">
-              <Button to="projects">{hero.cta}</Button>
-            </div>
+            <Button onClick={() => setActiveId("projects")}>{hero.cta}</Button>
           </div>
 
           {/* Stats */}
