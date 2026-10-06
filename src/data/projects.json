@@ -2,59 +2,48 @@
   {
     "id": "interview-prep",
     "title": "Interview Prep",
-    "description": "AI-powered interview preparation platform for realistic, role-specific interview practice based on a candidate's CV, target role, and company context.",
+    "description": "AI-powered interview preparation platform for realistic, role-specific interview practice based on a candidate's CV and target job specification.",
     "frontend": "Next.js",
-    "tech": [
-      "Next.js",
-      "TypeScript",
-      ".NET 9",
-      "Gemini API",
-      "Azure Speech Services",
-      "SQLite"
-    ],
+    "tech": ["Next.js", "TypeScript", ".NET 9", "SQLite"],
     "ai": true,
     "repo": "https://github.com/Msekeli/InterviewPrep.git",
-    "cover": "/images/interview-session.svg",
+    "cover": "/images/03-interview-session-active.webp",
     "screens": [
       {
-        "title": "Interview setup",
-        "description": "Configure an interview session around the candidate's CV, target role, and preparation requirements.",
-        "tech": ["Next.js", "TypeScript", ".NET 9"],
-        "image": "/images/interview-session.svg",
-        "imagePosition": "50% 20%",
-        "imageScale": 1
+        "title": "CV interview setup",
+        "description": "Configure an interview by providing the candidate's CV, which provides the foundation for role-specific interview preparation.",
+        "tech": ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+        "image": "/images/01-interview-setup-cv.webp"
       },
       {
-        "title": "Interview session",
-        "description": "Practise realistic interview questions through an interactive interview experience tailored to the selected role.",
-        "tech": ["Next.js", "Gemini API", "Azure Speech Services"],
-        "image": "/images/interview-session.svg",
-        "imagePosition": "50% 50%",
-        "imageScale": 1.05
+        "title": "Job specification setup",
+        "description": "Provide the target job specification so the interview can focus on the requirements, responsibilities, and skills relevant to the role.",
+        "tech": ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+        "image": "/images/02-interview-setup-job-specification.webp"
       },
       {
-        "title": "AI feedback",
-        "description": "Responses are evaluated to provide personalised feedback that helps the candidate identify areas for improvement.",
-        "tech": ["Gemini API", "TypeScript", ".NET 9"],
-        "image": "/images/interview-session.svg",
-        "imagePosition": "65% 50%",
-        "imageScale": 1.1
+        "title": "Interactive interview session",
+        "description": "Practise realistic interview questions through a turn-by-turn interview experience with spoken questions, candidate responses, and interactive interview controls.",
+        "tech": ["Next.js", "TypeScript", "React", "Azure Speech Services"],
+        "image": "/images/03-interview-session-active.webp"
       },
       {
-        "title": "Interview performance",
-        "description": "Interview sessions can be reviewed to help track preparation and performance across practice sessions.",
-        "tech": ["Next.js", "TypeScript", "SQLite"],
-        "image": "/images/interview-session.svg",
-        "imagePosition": "35% 70%",
-        "imageScale": 1.08
+        "title": "AI interview reflection",
+        "description": "Review structured post-interview feedback covering observations, strengths, communication, growth opportunities, overall impression, and the next area to focus on.",
+        "tech": ["Next.js", "TypeScript", "React", "Gemini API"],
+        "image": "/images/04-interview-reflection.webp"
       },
       {
-        "title": "AI-powered workflow",
-        "description": "The application combines the frontend, backend services, Gemini, and speech capabilities into one interview workflow.",
-        "tech": ["Next.js", "Gemini API", "Azure Speech Services"],
-        "image": "/images/interview-session.svg",
-        "imagePosition": "50% 80%",
-        "imageScale": 1
+        "title": "InterviewPrep ASP.NET Core Web API",
+        "description": "Explore the backend API used to manage interview sessions, questions, answers, and session completion through documented REST endpoints.",
+        "tech": [
+          ".NET 9",
+          "ASP.NET Core Web API",
+          "Entity Framework Core",
+          "SQLite",
+          "Swagger / OpenAPI"
+        ],
+        "image": "/images/05-interview-api-swagger.webp"
       }
     ]
   },
