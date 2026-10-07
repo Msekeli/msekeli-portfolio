@@ -15,44 +15,48 @@
 
 /* ========= INTERACTION ========= */
 
+/* Used by buttons and by Surface only when it is passed `interactive`.
+   Short transition, and the lift only exists on devices that can hover. */
 .interactive {
   transition:
-    transform 200ms ease,
-    box-shadow 200ms ease,
-    border-color 200ms ease,
-    color 200ms ease;
+    transform 100ms ease-out,
+    box-shadow 100ms ease-out,
+    border-color 100ms ease-out,
+    color 100ms ease-out;
 }
 
-.interactive:hover {
-  transform: translateY(-3px);
+@media (hover: hover) {
+  .interactive:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .surface-lift {
   transition:
-    transform 220ms ease,
-    box-shadow 220ms ease,
-    border-color 220ms ease;
+    transform 100ms ease-out,
+    box-shadow 100ms ease-out,
+    border-color 100ms ease-out;
 }
 
-.surface-lift:hover {
-  transform: translateY(-5px);
-  box-shadow:
-    var(--shadow-elevated),
-    0 0 26px rgba(212, 175, 55, 0.18);
+@media (hover: hover) {
+  .surface-lift:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      var(--shadow-elevated),
+      0 0 26px rgba(212, 175, 55, 0.18);
+  }
 }
 
 .field-focus {
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    border-color 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .field-focus:focus {
   outline: none;
   border-color: rgba(212, 175, 55, 0.42);
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
-  transform: translateY(-1px);
 }
 
 /* ========= GOLD EMPHASIS ========= */

@@ -1,26 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
-import Surface from "../components/Surface";
 import Icon from "../components/Icon";
 import Button from "../components/Button";
-import ProjectViewer from "../components/ProjectViewer";
+import ProjectViewer from "../components/project-viewer/ProjectViewer";
 import projects from "../data/projects.json";
 
-const MAX_TAGS = 3;
+// The card shows languages/frameworks only, all styled equally (same chips as
+// the Skills section). Set "cardTech" in projects.json to choose them; every
+// entry is shown. Tools and the rest of the stack live in the project viewer.
+// Without "cardTech", the first 3 technologies are used.
+const FALLBACK_TAGS = 3;
 
-// Card tags show the core stack only (frontend, backend, database), never a
-// "+N" overflow. Set "cardTech" in projects.json to choose them; otherwise the
-// frontend plus the first two other technologies are used. The full stack is
-// listed in the project viewer.
 function getCardTags(project) {
   if (project.cardTech) return project.cardTech;
-  if (!project.frontend) return project.tech;
-
-  const frontendKey = project.frontend.split(" ")[0];
-  const rest = project.tech.filter((tech) => !tech.startsWith(frontendKey));
-
-  return [project.frontend, ...rest];
+  return (project.tech ?? []).slice(0, FALLBACK_TAGS);
 }
 
 export default function Projects() {
@@ -79,86 +73,102 @@ export default function Projects() {
           <div className="-mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 xl:h-[max(40rem,calc(100svh-13.5rem))] xl:grid-cols-3 xl:grid-rows-2">
             {projects.map((project) => {
               const tags = getCardTags(project);
-              const visibleTags = tags.slice(0, MAX_TAGS);
+              const screenCount = project.screens?.length ?? 0;
+              const screenLabel = screenCount === 1 ? "screen" : "screens";
 
               return (
-                <Surface
+                /* Outer box is static: it receives hover and click, so the
+                   lift never makes the hover flicker, and a click anywhere on
+                   the card opens the viewer. */
+                <div
                   key={project.id}
-                  elevated
-                  noPadding
-                  className="group flex h-full min-h-0 flex-col overflow-hidden transition duration-300 hover:-translate-y-0.5"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${project.title} screens`}
+                  onClick={() => openProjectViewer(project)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      openProjectViewer(project);
+                    }
+                  }}
+                  className="group/card h-full min-h-0 cursor-pointer rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/70"
                 >
-                  <div className="relative aspect-[16/7] overflow-hidden rounded-t-2xl xl:aspect-auto xl:min-h-28 xl:flex-1">
-                    <img
-                      src={project.cover}
-                      alt={`${project.title} project screen`}
-                      loading="lazy"
-                      decoding="async"
-                      className="absolute inset-0 h-full w-full object-cover object-top image-render-crisp transition-transform duration-500 ease-out group-hover:scale-[1.025]"
-                    />
+                  {/* Inner card: the only thing that moves */}
+                  <div className="relative h-full min-h-0 transition-transform duration-100 ease-out [@media(hover:hover)]:group-hover/card:-translate-y-1">
+                    <div className="surface surface--elevated flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-transparent group-hover/card:border-gold-main/60">
+                      {/* Screenshot: always shown in full, never cropped,
+                          never moves. */}
+                      <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-black/40 xl:aspect-auto xl:min-h-28 xl:flex-1">
+                        <img
+                          src={project.cover}
+                          alt={`${project.title} project screen`}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-contain p-2"
+                        />
 
-                    {project.ai && (
-                      <span className="absolute right-3 top-3 rounded-md border border-gold-main px-2.5 py-1 text-sm font-semibold text-gold-main">
-                        AI
-                      </span>
-                    )}
-                  </div>
+                        {project.ai && (
+                          <span className="absolute right-3 top-3 rounded-md border border-gold-main bg-black/50 px-2.5 py-1 text-sm font-semibold text-gold-main">
+                            AI
+                          </span>
+                        )}
 
-                  <div className="flex shrink-0 flex-col gap-2.5 p-4">
-                    <h3 className="text-lg font-semibold leading-tight text-text-primary">
-                      {project.title}
-                    </h3>
+                        {screenCount > 0 && (
+                          <span className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-md bg-black/70 px-2 py-1 text-xs font-medium text-text-primary">
+                            <Icon name="Image" />
+                            {screenCount} {screenLabel}
+                          </span>
+                        )}
+                      </div>
 
-                    <p className="line-clamp-2 min-h-10 text-sm leading-5 text-text-secondary">
-                      {project.summary ?? project.description}
-                    </p>
+                      <div className="flex shrink-0 flex-col gap-2.5 p-4">
+                        <h3 className="text-lg font-semibold leading-tight text-text-primary">
+                          {project.title}
+                        </h3>
 
-                    <ul className="flex flex-nowrap gap-1.5 overflow-hidden">
-                      {visibleTags.map((tag, index) => (
-                        <li
-                          key={tag}
-                          className={`whitespace-nowrap rounded-md border px-2.5 py-1 text-xs font-medium ${
-                            index === 0
-                              ? "border-gold-main/60 bg-gold-main/10 text-gold-main"
-                              : "border-transparent bg-text-primary/5 text-text-secondary"
-                          }`}
-                        >
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
+                        {/* Never clamped. min-h-10 reserves two lines so
+                            every card lines up. Keep summaries to about two
+                            lines. */}
+                        <p className="min-h-10 text-sm leading-5 text-text-secondary">
+                          {project.summary ?? project.description}
+                        </p>
 
-                    <div className="flex gap-2 pt-1">
+                        {/* Same chip style as the Skills section, all equal */}
+                        <ul className="flex flex-wrap gap-1.5">
+                          {tags.map((tag) => (
+                            <li
+                              key={tag}
+                              className="rounded-full bg-white/10 px-3 py-1 text-xs"
+                            >
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Cover: purely visual, never intercepts the mouse, and
+                        appears instantly (no fade). */}
+                    <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-2xl bg-black/75 opacity-0 group-hover/card:opacity-100 group-focus-visible/card:opacity-100">
                       <Button
                         type="button"
                         variant="primary"
-                        onClick={() => openProjectViewer(project)}
-                        className="flex-1 justify-center"
+                        tabIndex={-1}
+                        className="pointer-events-none bg-black/50"
                       >
                         <Icon name="Image" />
                         <span>View screens</span>
                       </Button>
 
-                      {project.repo && (
-                        <Button
-                          type="button"
-                          variant="secondary"
-                          onClick={() =>
-                            window.open(
-                              project.repo,
-                              "_blank",
-                              "noopener,noreferrer",
-                            )
-                          }
-                          aria-label={`${project.title} source code`}
-                          className="border border-borderColor px-3! hover:border-gold-main"
-                        >
-                          <Icon name="Github" />
-                        </Button>
+                      {screenCount > 0 && (
+                        <span className="text-sm text-text-secondary">
+                          {screenCount} {screenLabel} inside
+                        </span>
                       )}
                     </div>
                   </div>
-                </Surface>
+                </div>
               );
             })}
           </div>

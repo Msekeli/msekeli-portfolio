@@ -34,6 +34,42 @@
         "image": "/images/04-interview-reflection.webp"
       },
       {
+        "title": "Job specification setup",
+        "description": "Provide the target job specification so the interview can focus on the requirements, responsibilities, and skills relevant to the role.",
+        "tech": ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+        "image": "/images/02-interview-setup-job-specification.webp"
+      },
+      {
+        "title": "Interactive interview session",
+        "description": "Practise realistic interview questions through a turn-by-turn interview experience with spoken questions, candidate responses, and interactive interview controls.",
+        "tech": ["Next.js", "TypeScript", "React", "Azure Speech Services"],
+        "image": "/images/03-interview-session-active.webp"
+      },
+      {
+        "title": "Job specification setup",
+        "description": "Provide the target job specification so the interview can focus on the requirements, responsibilities, and skills relevant to the role.",
+        "tech": ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+        "image": "/images/02-interview-setup-job-specification.webp"
+      },
+      {
+        "title": "Interactive interview session",
+        "description": "Practise realistic interview questions through a turn-by-turn interview experience with spoken questions, candidate responses, and interactive interview controls.",
+        "tech": ["Next.js", "TypeScript", "React", "Azure Speech Services"],
+        "image": "/images/03-interview-session-active.webp"
+      },
+      {
+        "title": "Job specification setup",
+        "description": "Provide the target job specification so the interview can focus on the requirements, responsibilities, and skills relevant to the role.",
+        "tech": ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+        "image": "/images/02-interview-setup-job-specification.webp"
+      },
+      {
+        "title": "Interactive interview session",
+        "description": "Practise realistic interview questions through a turn-by-turn interview experience with spoken questions, candidate responses, and interactive interview controls.",
+        "tech": ["Next.js", "TypeScript", "React", "Azure Speech Services"],
+        "image": "/images/03-interview-session-active.webp"
+      },
+      {
         "title": "InterviewPrep ASP.NET Core Web API",
         "description": "Explore the backend API used to manage interview sessions, questions, answers, and session completion through documented REST endpoints.",
         "tech": [
