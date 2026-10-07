@@ -2,17 +2,6 @@ import "devicon/devicon.min.css";
 import tech from "../data/techStrip.json";
 
 function TechnologyIcon({ technology }) {
-  if (technology.name === "Next.js") {
-    return (
-      <img
-        src="/nextjs-wordmark.svg"
-        alt=""
-        aria-hidden="true"
-        className="relative z-10 h-auto w-10"
-      />
-    );
-  }
-
   return (
     <i
       className={`${technology.icon} relative z-10 text-[32px]`}

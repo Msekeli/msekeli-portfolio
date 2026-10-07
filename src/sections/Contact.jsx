@@ -11,7 +11,6 @@ import Icon from "../components/Icon";
 // Public contact information
 const CONTACT_EMAIL = "msekeli14@gmail.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/msekeli-mkwibiso/";
-const GITHUB_URL = "https://github.com/Msekeli";
 
 // WhatsApp Business
 // International format, digits only. Do not include "+".
@@ -46,9 +45,7 @@ function ChannelCard({ icon, title, note, children, featured = false }) {
           className={featured ? "text-green-400" : "text-gold-main"}
         />
 
-        {featured && (
-          <span className="text-xs text-green-400">Fastest</span>
-        )}
+        {featured && <span className="text-xs text-green-400">Fastest</span>}
       </div>
 
       <div>
@@ -64,11 +61,7 @@ function ChannelCard({ icon, title, note, children, featured = false }) {
 function DetailRow({ icon, title, note }) {
   return (
     <div className="flex items-start gap-3">
-      <Icon
-        name={icon}
-        size={18}
-        className="mt-0.5 shrink-0 text-gold-main"
-      />
+      <Icon name={icon} size={18} className="mt-0.5 shrink-0 text-gold-main" />
 
       <div className="text-sm">
         <p className="text-base">{title}</p>
@@ -139,32 +132,23 @@ export default function Contact() {
       console.error(error);
 
       setStatus("error");
-      setMessage(
-        error.message || "Something went wrong. Please try again.",
-      );
+      setMessage(error.message || "Something went wrong. Please try again.");
     }
   }
 
   return (
-    <Section
-      id="contact"
-      className="flex items-center justify-center"
-    >
+    <Section id="contact" className="flex items-center justify-center">
       <div className="mx-auto w-full max-w-6xl">
-        <SectionTitle className="mb-0">
-          Let's talk
-        </SectionTitle>
+        <SectionTitle className="mb-0">Let's talk</SectionTitle>
 
-        <div className="mb-6 flex flex-col items-start gap-3">
-          <Text variant="secondary">
-            Open to full-stack and front-end roles. Pick whichever
-            channel suits you. I reply within one working day.
+        <div className="-mt-2 mb-6">
+          <Text
+            variant="secondary"
+            className="text-base font-bold leading-relaxed text-text-primary"
+          >
+            Open to full-stack and front-end roles. Pick whichever channel suits
+            you. I reply within one working day.
           </Text>
-
-          <span className="inline-flex items-center gap-2 text-xs text-green-400">
-            <span className="h-2 w-2 rounded-full bg-green-400" />
-            Available for work
-          </span>
         </div>
 
         {/* Contact channels */}
@@ -185,11 +169,7 @@ export default function Contact() {
             </a>
           </ChannelCard>
 
-          <ChannelCard
-            icon="Mail"
-            title="Email"
-            note="For CVs and detail"
-          >
+          <ChannelCard icon="Mail" title="Email" note="For CVs and detail">
             <Button
               type="button"
               onClick={handleCopyEmail}
@@ -207,11 +187,7 @@ export default function Contact() {
             <Button
               type="button"
               onClick={() =>
-                window.open(
-                  LINKEDIN_URL,
-                  "_blank",
-                  "noopener,noreferrer",
-                )
+                window.open(LINKEDIN_URL, "_blank", "noopener,noreferrer")
               }
               className="w-full justify-center"
             >
@@ -224,9 +200,7 @@ export default function Contact() {
           {/* Contact form */}
           <Surface className="gold-glow surface-lift">
             <div className="space-y-4">
-              <h3 className="text-base font-semibold">
-                Or send a message
-              </h3>
+              <h3 className="text-base font-semibold">Or send a message</h3>
 
               <form className="space-y-3" onSubmit={handleSubmit}>
                 {/* Honeypot */}
@@ -265,29 +239,18 @@ export default function Contact() {
                   className="surface field-focus w-full resize-none rounded-lg border border-white/5 px-4 py-2"
                 />
 
-                <Button
-                  type="submit"
-                  disabled={status === "sending"}
-                >
-                  {status === "sending"
-                    ? "Sending…"
-                    : "Send message"}
+                <Button type="submit" disabled={status === "sending"}>
+                  {status === "sending" ? "Sending…" : "Send message"}
                 </Button>
 
                 {status === "success" && (
-                  <p
-                    className="text-sm text-green-400"
-                    role="status"
-                  >
+                  <p className="text-sm text-green-400" role="status">
                     {message}
                   </p>
                 )}
 
                 {status === "error" && (
-                  <p
-                    className="text-sm text-red-400"
-                    role="alert"
-                  >
+                  <p className="text-sm text-red-400" role="alert">
                     {message}
                   </p>
                 )}
@@ -320,8 +283,7 @@ export default function Contact() {
                   </h3>
 
                   <p className="text-sm text-text-secondary">
-                    Point your phone camera at the code to open
-                    the chat.
+                    Point your phone camera at the code to open the chat.
                   </p>
                 </div>
               </div>
@@ -329,9 +291,7 @@ export default function Contact() {
 
             <Surface className="gold-glow surface-lift">
               <div className="space-y-4">
-                <h3 className="text-base font-semibold">
-                  Good to know
-                </h3>
+                <h3 className="text-base font-semibold">Good to know</h3>
 
                 <DetailRow
                   icon="MapPin"
@@ -339,11 +299,7 @@ export default function Contact() {
                   note={LOCATION_NOTE}
                 />
 
-                <DetailRow
-                  icon="Clock"
-                  title={HOURS_TEXT}
-                  note={HOURS_NOTE}
-                />
+                <DetailRow icon="Clock" title={HOURS_TEXT} note={HOURS_NOTE} />
               </div>
             </Surface>
           </div>
