@@ -1,12 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+
 import Button from "./Button";
 import Icon from "./Icon";
 import Surface from "./Surface";
 
 const AUTOPLAY_DELAY = 6000;
-const EMBLA_OPTIONS = { loop: true, align: "center", dragFree: false };
+
+const EMBLA_OPTIONS = {
+  loop: true,
+  align: "center",
+  dragFree: false,
+};
 
 const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
@@ -21,7 +28,7 @@ function ScreenImage({ screen, alt, className = "" }) {
     <img
       src={screen.image}
       alt={alt}
-      className={`h-full w-full object-cover image-render-crisp ${className}`}
+      className={`h-full w-full object-contain image-render-crisp ${className}`}
       style={{
         objectPosition: position,
         transform: `scale(${screen.imageScale ?? 1})`,
@@ -51,16 +58,20 @@ export default function ProjectViewer({ project, onClose }) {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [paused, setPaused] = useState(prefersReducedMotion());
+
   const pausedRef = useRef(paused);
   const closeRef = useRef(null);
 
   const restartTimer = useCallback(() => {
-    if (!pausedRef.current) autoplay.reset();
+    if (!pausedRef.current) {
+      autoplay.reset();
+    }
   }, [autoplay]);
 
   const scrollTo = useCallback(
     (index) => {
       if (!emblaApi) return;
+
       emblaApi.scrollTo(index);
       restartTimer();
     },
@@ -69,12 +80,14 @@ export default function ProjectViewer({ project, onClose }) {
 
   const scrollPrevious = useCallback(() => {
     if (!emblaApi) return;
+
     emblaApi.scrollPrev();
     restartTimer();
   }, [emblaApi, restartTimer]);
 
   const scrollNext = useCallback(() => {
     if (!emblaApi) return;
+
     emblaApi.scrollNext();
     restartTimer();
   }, [emblaApi, restartTimer]);
@@ -95,11 +108,13 @@ export default function ProjectViewer({ project, onClose }) {
 
   const pauseWhileHovering = () => {
     if (!emblaApi || pausedRef.current) return;
+
     autoplay.stop();
   };
 
   const resumeAfterHovering = () => {
     if (!emblaApi || pausedRef.current) return;
+
     autoplay.play();
   };
 
@@ -107,7 +122,9 @@ export default function ProjectViewer({ project, onClose }) {
     if (!project) return;
 
     const previousOverflow = document.body.style.overflow;
+
     document.body.style.overflow = "hidden";
+
     closeRef.current?.focus();
 
     return () => {
@@ -174,36 +191,51 @@ export default function ProjectViewer({ project, onClose }) {
   };
 
   const arrowClass =
-    "interactive flex h-[42px] w-[42px] shrink-0 cursor-pointer select-none items-center justify-center rounded-full border border-borderColor text-text-secondary transition-all duration-150 hover:scale-105 hover:border-gold-main hover:bg-gold-main/15 hover:text-gold-main active:scale-90 active:bg-gold-main/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/60";
+    "interactive flex h-9 w-9 shrink-0 cursor-pointer select-none items-center justify-center rounded-full border border-borderColor text-text-secondary transition-all duration-150 hover:scale-105 hover:border-gold-main hover:bg-gold-main/15 hover:text-gold-main active:scale-90 active:bg-gold-main/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/60 sm:h-[42px] sm:w-[42px]";
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-3 sm:p-5"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-2 sm:p-3 md:p-5"
       onClick={handleBackdropClick}
       role="presentation"
     >
       <style>{`
         @keyframes viewer-fade {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: none; }
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+
+          to {
+            opacity: 1;
+            transform: none;
+          }
         }
-        .viewer-fade { animation: viewer-fade 280ms ease-out; }
+
+        .viewer-fade {
+          animation: viewer-fade 280ms ease-out;
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          .viewer-fade { animation: none; }
+          .viewer-fade {
+            animation: none;
+          }
         }
       `}</style>
+
       <Surface
         elevated
         noPadding
-        className="flex max-h-[96vh] w-full max-w-[1210px] flex-col overflow-hidden bg-(--bg-elevated) gold-glow"
+        className="flex h-[calc(100dvh-1rem)] max-h-[100dvh] w-full max-w-[1320px] flex-col overflow-hidden bg-(--bg-elevated) gold-glow sm:h-auto sm:max-h-[96dvh]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-viewer-title"
       >
-        <header className="flex shrink-0 items-center justify-between gap-4 px-5 py-[18px] sm:px-7">
+        {/* HEADER */}
+        <header className="flex shrink-0 items-center justify-between gap-3 border-b border-borderColor px-4 py-3 sm:px-6 sm:py-4 md:px-7">
           <h2
             id="project-viewer-title"
-            className="truncate text-[15px] font-medium uppercase tracking-widest text-text-secondary"
+            className="min-w-0 truncate text-[22px] font-semibold uppercase leading-none tracking-[0.12em] text-gold-main sm:text-[28px] md:text-[34px]"
           >
             {project.title}
           </h2>
@@ -213,7 +245,7 @@ export default function ProjectViewer({ project, onClose }) {
             type="button"
             onClick={onClose}
             aria-label="Close project viewer"
-            className="interactive flex h-[46px] w-[46px] shrink-0 cursor-pointer select-none items-center justify-center rounded-full border border-borderColor text-text-secondary transition-all duration-150 hover:scale-105 hover:border-gold-main hover:bg-gold-main/15 hover:text-gold-main active:scale-90 active:bg-gold-main/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/60"
+            className="interactive flex h-10 w-10 shrink-0 cursor-pointer select-none items-center justify-center rounded-full border border-borderColor text-text-secondary transition-all duration-150 hover:scale-105 hover:border-gold-main hover:bg-gold-main/15 hover:text-gold-main active:scale-90 active:bg-gold-main/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/60 sm:h-[46px] sm:w-[46px]"
           >
             <svg
               width="21"
@@ -230,10 +262,12 @@ export default function ProjectViewer({ project, onClose }) {
           </button>
         </header>
 
+        {/* SCROLLABLE CONTENT */}
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <div className="grid grid-cols-1 gap-6 px-5 pb-6 sm:px-7 lg:grid-cols-[minmax(0,1.5fr)_minmax(260px,1fr)] lg:gap-8">
+          <div className="grid min-w-0 grid-cols-1 gap-5 px-3 py-4 sm:px-6 sm:py-5 md:gap-6 md:px-7 md:pb-6 lg:grid-cols-[minmax(0,1.85fr)_minmax(280px,0.75fr)] lg:gap-8">
+            {/* SCREENSHOT AREA */}
             <section className="min-w-0">
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2 sm:gap-3">
                 <button
                   type="button"
                   onClick={scrollPrevious}
@@ -241,8 +275,8 @@ export default function ProjectViewer({ project, onClose }) {
                   className={arrowClass}
                 >
                   <svg
-                    width="22"
-                    height="22"
+                    width="21"
+                    height="21"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -256,13 +290,13 @@ export default function ProjectViewer({ project, onClose }) {
                 </button>
 
                 <div
-                  className="min-w-0 flex-1 rounded-2xl border border-gold-main/50 bg-(--bg-primary) p-2 gold-glow"
+                  className="min-w-0 flex-1 rounded-xl border border-gold-main/50 bg-(--bg-primary) p-1.5 gold-glow sm:rounded-2xl sm:p-2"
                   onMouseEnter={pauseWhileHovering}
                   onMouseLeave={resumeAfterHovering}
                 >
                   <div
                     ref={emblaRef}
-                    className="overflow-hidden rounded-xl"
+                    className="overflow-hidden rounded-lg sm:rounded-xl"
                     aria-roledescription="carousel"
                   >
                     <div className="flex touch-pan-y">
@@ -273,7 +307,20 @@ export default function ProjectViewer({ project, onClose }) {
                           aria-roledescription="slide"
                           aria-label={`${index + 1} of ${screens.length}`}
                         >
-                          <div className="aspect-[16/10.5] max-h-[58vh] w-full overflow-hidden">
+                          <div
+                            className="
+                              aspect-[4/3]
+                              max-h-[43dvh]
+                              min-h-[190px]
+                              w-full
+                              overflow-hidden
+                              bg-(--bg-primary)
+                              sm:aspect-[16/11.5]
+                              sm:max-h-[58vh]
+                              sm:min-h-[300px]
+                              lg:max-h-[64vh]
+                            "
+                          >
                             <ScreenImage
                               screen={screen}
                               alt={`${project.title} — ${screen.title}`}
@@ -292,8 +339,8 @@ export default function ProjectViewer({ project, onClose }) {
                   className={arrowClass}
                 >
                   <svg
-                    width="22"
-                    height="22"
+                    width="21"
+                    height="21"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -307,82 +354,91 @@ export default function ProjectViewer({ project, onClose }) {
                 </button>
               </div>
 
-              <div className="mt-5 flex justify-center gap-2 px-12">
-                {screens.map((screen, index) => {
-                  const isActive = index === selectedIndex;
+              {/* THUMBNAILS */}
+              <div className="mt-3 max-h-[92px] overflow-y-auto px-1 sm:mt-5 sm:max-h-[108px] sm:px-2">
+                <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                  {screens.map((screen, index) => {
+                    const isActive = index === selectedIndex;
 
-                  return (
-                    <button
-                      key={`${screen.title}-thumb-${index}`}
-                      type="button"
-                      onClick={() => scrollTo(index)}
-                      aria-label={`Go to screen ${index + 1}: ${screen.title}`}
-                      aria-current={isActive ? "true" : undefined}
-                      className={`interactive h-[59px] max-w-[101px] flex-1 cursor-pointer overflow-hidden rounded-lg border-2 bg-(--bg-primary) transition-all duration-150 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/60 ${
-                        isActive
-                          ? "border-gold-main opacity-100"
-                          : "border-borderColor opacity-55 hover:border-gold-main/60 hover:opacity-100"
-                      }`}
-                    >
-                      <ScreenImage screen={screen} alt="" />
-                    </button>
-                  );
-                })}
+                    return (
+                      <button
+                        key={`${screen.title}-thumb-${index}`}
+                        type="button"
+                        onClick={() => scrollTo(index)}
+                        aria-label={`Go to screen ${index + 1}: ${screen.title}`}
+                        aria-current={isActive ? "true" : undefined}
+                        className={`interactive h-[46px] w-[62px] shrink-0 cursor-pointer overflow-hidden rounded-md border-2 bg-(--bg-primary) transition-all duration-150 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/60 sm:h-[48px] sm:w-[64px] sm:rounded-lg ${
+                          isActive
+                            ? "border-gold-main opacity-100"
+                            : "border-borderColor opacity-55 hover:border-gold-main/60 hover:opacity-100"
+                        }`}
+                      >
+                        <ScreenImage screen={screen} alt="" />
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </section>
 
+            {/* INFORMATION PANEL */}
             <aside
               key={selectedIndex}
-              className="viewer-fade flex min-w-0 flex-col gap-3"
+              className="viewer-fade flex min-w-0 flex-col gap-3 border-t border-borderColor pt-5 lg:border-t-0 lg:pt-0"
             >
+              {/* COUNTER */}
               <p className="leading-none" aria-hidden="true">
-                <span className="text-[50px] font-semibold text-gold-main">
+                <span className="text-[40px] font-semibold text-gold-main sm:text-[50px]">
                   {pad(selectedIndex + 1)}
                 </span>
-                <span className="text-[19px] text-text-muted">
+
+                <span className="text-[16px] text-text-muted sm:text-[19px]">
                   {" "}
                   / {pad(screens.length)}
                 </span>
               </p>
 
-              <h3 className="text-[21px] font-semibold leading-tight text-text-primary sm:text-[25px]">
+              {/* SCREEN TITLE */}
+              <h3 className="text-[20px] font-semibold leading-tight text-text-primary sm:text-[25px]">
                 {currentScreen.title}
               </h3>
 
-              <p className="text-[15px] leading-6 text-text-secondary sm:text-[17px] sm:leading-7">
-                {currentScreen.description}
-              </p>
+              {/* DESCRIPTION + TECHNOLOGIES */}
+              <div className="space-y-4">
+                <p className="text-[14px] leading-6 text-text-secondary sm:text-[17px] sm:leading-7">
+                  {currentScreen.description}
+                </p>
 
-              <div className="flex flex-wrap gap-2">
-                {currentScreen.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-full border border-gold-main/50 px-3.5 py-1 text-[13px] text-gold-main"
-                  >
-                    {tech}
-                  </span>
-                ))}
+                {currentScreen.tech?.length > 0 && (
+                  <div className="border-t border-borderColor pt-4">
+                    <p className="mb-3 text-xs font-medium uppercase tracking-widest text-text-muted">
+                      Technologies & tools
+                    </p>
+
+                    <div className="flex min-w-0 flex-wrap gap-2">
+                      {currentScreen.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="shrink-0 whitespace-nowrap rounded-full border border-gold-main/50 px-3 py-1 text-[12px] text-gold-main sm:px-3.5 sm:text-[13px]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {project.tech?.length > 0 && (
-                <div className="mt-2 border-t border-borderColor pt-4">
-                  <p className="text-xs font-medium uppercase tracking-widest text-text-muted">
-                    Built with
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-text-secondary">
-                    {project.tech.join(" · ")}
-                  </p>
-                </div>
-              )}
-
+              {/* SOURCE CODE */}
               {project.repo && (
-                <div className="mt-auto pt-4">
+                <div className="pt-2 lg:mt-auto lg:pt-4">
                   <Button
                     type="button"
                     variant="primary"
                     onClick={() =>
                       window.open(project.repo, "_blank", "noopener,noreferrer")
                     }
+                    className="w-full justify-center"
                   >
                     <Icon name="Github" />
                     <span>Source Code</span>
@@ -393,12 +449,13 @@ export default function ProjectViewer({ project, onClose }) {
           </div>
         </div>
 
-        <footer className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-borderColor px-5 py-[14px] sm:px-7">
+        {/* FOOTER */}
+        <footer className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-borderColor px-3 py-3 sm:gap-3 sm:px-6 sm:py-[14px] md:px-7">
           <Button
             type="button"
-            variant="secondary"
+            variant="primary"
             onClick={onClose}
-            className="border border-borderColor text-[15px]! hover:border-gold-main"
+            className="text-[13px]! sm:text-[15px]!"
           >
             <Icon name="ArrowLeft" />
             <span>Back to projects</span>
@@ -408,16 +465,17 @@ export default function ProjectViewer({ project, onClose }) {
             type="button"
             variant="secondary"
             onClick={toggleAutoplay}
-            className="border border-borderColor text-[15px]! hover:border-gold-main"
+            className="border border-borderColor text-[13px]! hover:border-gold-main sm:text-[15px]!"
           >
             <Icon name={paused ? "Play" : "Pause"} />
             <span>{paused ? "Play slideshow" : "Pause slideshow"}</span>
           </Button>
 
-          <p className="hidden items-center gap-2 text-[15px] text-text-secondary sm:flex">
+          <p className="hidden items-center gap-2 text-[15px] text-text-secondary md:flex">
             <kbd className="rounded-md border border-borderColor px-2 py-0.5 text-[13px] font-medium text-text-primary shadow-[0_2px_0_rgba(255,255,255,0.08)]">
               Esc
             </kbd>
+
             <span>to close</span>
           </p>
         </footer>
