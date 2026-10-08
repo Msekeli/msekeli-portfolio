@@ -12,6 +12,9 @@ export default function ProjectViewerInfo({
   // Per-screen tech if the slide has it, otherwise the project's full stack.
   const tech = currentScreen.tech?.length ? currentScreen.tech : project.tech;
 
+  // Optional per-screen highlights/details.
+  const details = currentScreen.details ?? [];
+
   return (
     <aside
       key={selectedIndex}
@@ -37,6 +40,23 @@ export default function ProjectViewerInfo({
         <p className="text-[14px] leading-6 text-text-secondary sm:text-[17px] sm:leading-7">
           {currentScreen.description}
         </p>
+
+        {details.length > 0 && (
+          <div className="border-t border-borderColor pt-4">
+            <p className="mb-3 text-xs font-medium uppercase tracking-widest text-text-muted">
+              Highlights
+            </p>
+
+            <ul className="space-y-2 text-[13px] leading-5 text-text-secondary sm:text-[15px] sm:leading-6">
+              {details.map((detail) => (
+                <li key={detail} className="flex gap-2">
+                  <span className="text-gold-main">•</span>
+                  <span>{detail}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {tech?.length > 0 && (
           <div className="border-t border-borderColor pt-4">

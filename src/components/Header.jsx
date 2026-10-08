@@ -37,7 +37,8 @@ export default function Header() {
         />
 
         {/* Center status */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        {/* Center status: hidden on mobile, shown on larger screens */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block">
           <span className="inline-flex items-center gap-2 whitespace-nowrap text-xs font-medium text-green-400">
             <span className="h-2 w-2 rounded-full bg-green-400" />
             Available for work

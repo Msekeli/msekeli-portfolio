@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react";
 
-// Always shows the whole screenshot: contain, no zoom, no offset, no GPU tricks.
+// Always fills the entire screenshot area.
+// No cropping. No letterboxing. Aspect ratio may stretch.
 function ScreenImage({ screen, alt }) {
   return (
     <img
       src={screen.image}
       alt={alt}
-      className="h-full w-full object-contain"
+      className="h-full w-full object-fill"
       decoding="async"
     />
   );
@@ -25,7 +26,6 @@ export default function ProjectViewerCarousel({
 }) {
   const stripRef = useRef(null);
 
-  // Keep the active thumbnail centred. Only the strip scrolls, never the page.
   useEffect(() => {
     const strip = stripRef.current;
     const active = strip?.querySelector('[aria-current="true"]');
@@ -130,9 +130,6 @@ export default function ProjectViewerCarousel({
         </button>
       </div>
 
-      {/* One row that scrolls sideways, so 5 or 15 screens never squeeze or
-          wrap. justify-center-safe centres a short row and keeps a long row
-          scrollable from its first thumbnail. */}
       <div
         ref={stripRef}
         className="relative mt-3 flex justify-center-safe gap-1.5 overflow-x-auto px-1 py-1 [scrollbar-width:none] sm:mt-5 sm:gap-2 sm:px-2 [&::-webkit-scrollbar]:hidden"

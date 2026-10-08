@@ -94,68 +94,67 @@ export default function Projects() {
                   }}
                   className="group/card h-full min-h-0 cursor-pointer rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/70"
                 >
-                  {/* Inner card: the only thing that moves */}
+                  {/* Inner card: the whole card lifts as one piece */}
                   <div className="relative h-full min-h-0 transition-transform duration-100 ease-out [@media(hover:hover)]:group-hover/card:-translate-y-1">
-                    <div className="surface surface--elevated flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-transparent group-hover/card:border-gold-main/60">
-                      {/* Screenshot: always shown in full, never cropped,
-                          never moves. */}
-                      <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-black/40 xl:aspect-auto xl:min-h-28 xl:flex-1">
+                    <div className="surface surface--elevated gold-glow flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-transparent group-hover/card:border-gold-main/60">
+                      {/* 1. Project name: gold, one line */}
+                      <h3 className="h-9 shrink-0 truncate px-4 pt-2 text-lg font-semibold leading-7 text-gold-main">
+                        {project.title}
+                      </h3>
+
+                      {/* 2. Image frame: same size on every card; the screenshot
+                          is stretched to fill it 100% */}
+                      <div className="relative mx-4 aspect-video shrink-0 overflow-hidden rounded-xl bg-[var(--bg-primary)] ring-1 ring-white/10 xl:aspect-auto xl:min-h-28 xl:flex-1">
                         <img
                           src={project.cover}
                           alt={`${project.title} project screen`}
                           loading="lazy"
                           decoding="async"
-                          className="absolute inset-0 h-full w-full object-contain p-2"
+                          className="absolute inset-0 h-full w-full object-fill"
                         />
 
                         {project.ai && (
-                          <span className="absolute right-3 top-3 rounded-md border border-gold-main bg-black/50 px-2.5 py-1 text-sm font-semibold text-gold-main">
+                          <span className="absolute right-2 top-2 rounded-md border border-gold-main bg-[var(--bg-primary)] px-2 py-0.5 text-xs font-semibold text-gold-main">
                             AI
                           </span>
                         )}
 
                         {screenCount > 0 && (
-                          <span className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-md bg-black/70 px-2 py-1 text-xs font-medium text-text-primary">
+                          <span className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-md bg-[var(--bg-primary)] px-2 py-1 text-xs font-medium text-text-primary">
                             <Icon name="Image" />
                             {screenCount} {screenLabel}
                           </span>
                         )}
                       </div>
 
-                      <div className="flex shrink-0 flex-col gap-2.5 p-4">
-                        <h3 className="text-lg font-semibold leading-tight text-text-primary">
-                          {project.title}
-                        </h3>
+                      {/* 3. Description: fixed two-line box. Keep the first
+                          description in projects.json to about two lines. */}
+                      <p className="h-12 shrink-0 px-4 pt-2 text-sm leading-5 text-text-secondary">
+                        {project.description}
+                      </p>
 
-                        {/* Never clamped. min-h-10 reserves two lines so
-                            every card lines up. Keep summaries to about two
-                            lines. */}
-                        <p className="min-h-10 text-sm leading-5 text-text-secondary">
-                          {project.summary ?? project.description}
-                        </p>
-
-                        {/* Same chip style as the Skills section, all equal */}
-                        <ul className="flex flex-wrap gap-1.5">
-                          {tags.map((tag) => (
-                            <li
-                              key={tag}
-                              className="rounded-full bg-white/10 px-3 py-1 text-xs"
-                            >
-                              {tag}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      {/* 4. Tech stack: one fixed row, same chip style as the
+                          Skills section */}
+                      <ul className="flex h-11 shrink-0 flex-nowrap items-center gap-1.5 overflow-hidden px-4 pb-1">
+                        {tags.map((tag) => (
+                          <li
+                            key={tag}
+                            className="shrink-0 whitespace-nowrap rounded-full bg-white/10 px-3 py-1 text-xs"
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
                     {/* Cover: purely visual, never intercepts the mouse, and
                         appears instantly (no fade). */}
-                    <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-2xl bg-black/75 opacity-0 group-hover/card:opacity-100 group-focus-visible/card:opacity-100">
+                    <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-2xl bg-[color-mix(in_srgb,var(--bg-primary)_90%,transparent)] opacity-0 group-hover/card:opacity-100 group-focus-visible/card:opacity-100">
                       <Button
                         type="button"
                         variant="primary"
                         tabIndex={-1}
-                        className="pointer-events-none bg-black/50"
+                        className="pointer-events-none bg-[var(--bg-primary)]"
                       >
                         <Icon name="Image" />
                         <span>View screens</span>
