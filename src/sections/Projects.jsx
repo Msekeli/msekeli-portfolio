@@ -1,159 +1,182 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
-import Text from "../components/Text";
-import Surface from "../components/Surface";
-import Button from "../components/Button";
 import Icon from "../components/Icon";
+import Button from "../components/Button";
+import ProjectViewer from "../components/project-viewer/ProjectViewer";
 import projects from "../data/projects.json";
 
-export default function Projects() {
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState("next");
-  const [perPage, setPerPage] = useState(2);
+// The card shows languages/frameworks only, all styled equally (same chips as
+// the Skills section). Set "cardTech" in projects.json to choose them; every
+// entry is shown. Tools and the rest of the stack live in the project viewer.
+// Without "cardTech", the first 3 technologies are used.
+const FALLBACK_TAGS = 3;
 
-  const total = projects.length;
+function getCardTags(project) {
+  if (project.cardTech) return project.cardTech;
+  return (project.tech ?? []).slice(0, FALLBACK_TAGS);
+}
+
+export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const previousScrollY = useRef(0);
 
   useEffect(() => {
-    const update = () => {
-      if (window.innerWidth < 768) {
-        setPerPage(1);
-      } else {
-        setPerPage(2);
-      }
+    const handlePopState = () => {
+      setSelectedProject(null);
+
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: previousScrollY.current,
+          behavior: "instant",
+        });
+      });
     };
 
-    update();
-    window.addEventListener("resize", update);
+    window.addEventListener("popstate", handlePopState);
 
-    return () => window.removeEventListener("resize", update);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
   }, []);
 
-  const visible = projects.slice(index, index + perPage);
+  const openProjectViewer = (project) => {
+    previousScrollY.current = window.scrollY;
 
-  const next = () => {
-    if (index + perPage < total) {
-      setDirection("next");
-      setIndex(index + perPage);
-    }
+    window.history.pushState({ projectViewer: true }, "", window.location.href);
+
+    setSelectedProject(project);
   };
 
-  const prev = () => {
-    if (index - perPage >= 0) {
-      setDirection("prev");
-      setIndex(index - perPage);
+  const closeProjectViewer = () => {
+    if (window.history.state?.projectViewer) {
+      window.history.back();
+      return;
     }
+
+    setSelectedProject(null);
   };
 
   return (
-    <Section id="projects">
-      {" "}
-      <div className="stagger flex flex-col">
-        {" "}
-        <div className="flex items-center justify-between mb-1">
-          {" "}
+    <>
+      <Section id="projects">
+        <div className="flex flex-col">
           <SectionTitle>Projects</SectionTitle>
-          <span className="text-sm md:text-lg font-bold text-text-white">
-            {index + 1}-{Math.min(index + perPage, total)} of {total}
-          </span>
-        </div>
-        <div className="flex justify-between mb-3">
-          <button
-            onClick={prev}
-            disabled={index === 0}
-            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
-          >
-            ← Previous
-          </button>
 
-          <button
-            onClick={next}
-            disabled={index + perPage >= total}
-            className="text-sm md:text-lg font-bold text-text-white hover:text-gold-main disabled:opacity-30"
-          >
-            Next →
-          </button>
-        </div>
-        <div className="border-b border-borderColor mb-4"></div>
-        <div
-          key={index}
-          className={`
-        grid grid-cols-1 md:grid-cols-2 gap-6
-        ${direction === "next" ? "animate-slide-left" : "animate-slide-right"}
-      `}
-        >
-          {visible.map((project) => (
-            <Surface
-              key={project.title}
-              elevated
-              className="group flex flex-col gold-glow surface-lift transition"
-            >
-              <div className="aspect-video overflow-hidden rounded-lg">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 image-render-crisp"
-                  style={{ imageRendering: "auto" }}
-                />
-              </div>
+          {/*
+            On xl screens the grid is sized to the viewport, with a minimum
+            height so cards never get cramped. Adjust the 13.5rem offset (nav
+            bar + title + section padding) if the bottom row sits too high or
+            too low. The negative top margin pulls the grid up under the title;
+            remove it if SectionTitle's spacing changes.
+          */}
+          <div className="-mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 xl:h-[max(40rem,calc(100svh-13.5rem))] xl:grid-cols-3 xl:grid-rows-2">
+            {projects.map((project) => {
+              const tags = getCardTags(project);
+              const screenCount = project.screens?.length ?? 0;
+              const screenLabel = screenCount === 1 ? "screen" : "screens";
 
-              <div className="mt-3 space-y-3 flex flex-col grow">
-                <h3 className="text-sm font-medium text-text-primary">
-                  {project.title}
-                </h3>
-
-                <div className="flex flex-wrap gap-1">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                    className="text-xs px-2 py-1 border border-gold-main/30 rounded transition group-hover:border-gold-main/60 group-hover:text-gold-soft"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <Text
-                  variant="secondary"
-                  className="text-sm leading-relaxed line-clamp-3"
+              return (
+                /* Outer box is static: it receives hover and click, so the
+                   lift never makes the hover flicker, and a click anywhere on
+                   the card opens the viewer. */
+                <div
+                  key={project.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${project.title} screens`}
+                  onClick={() => openProjectViewer(project)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      openProjectViewer(project);
+                    }
+                  }}
+                  className="group/card h-full min-h-0 cursor-pointer rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-main/70"
                 >
-                  {project.description}
-                </Text>
+                  {/* Inner card: the whole card lifts as one piece */}
+                  <div className="relative h-full min-h-0 transition-transform duration-100 ease-out [@media(hover:hover)]:group-hover/card:-translate-y-1">
+                    <div className="surface surface--elevated gold-glow flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-transparent group-hover/card:border-gold-main/60">
+                      {/* 1. Project name: gold, one line */}
+                      <h3 className="h-9 shrink-0 truncate px-4 pt-2 text-lg font-semibold leading-7 text-gold-main">
+                        {project.title}
+                      </h3>
 
-                <div className="flex flex-wrap gap-2 pt-2 mt-auto">
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button variant="primary">
-                        <Icon name="Play" />
-                        Watch Demo
-                      </Button>
-                    </a>
-                  )}
+                      {/* 2. Image frame: same size on every card; the screenshot
+                          is stretched to fill it 100% */}
+                      <div className="relative mx-4 aspect-video shrink-0 overflow-hidden rounded-xl bg-[var(--bg-primary)] ring-1 ring-white/10 xl:aspect-auto xl:min-h-28 xl:flex-1">
+                        <img
+                          src={project.cover}
+                          alt={`${project.title} project screen`}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-fill"
+                        />
 
-                  {project.repo && (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button variant="secondary">
-                        <Icon name="Github" />
-                        Source Code
+                        {project.ai && (
+                          <span className="absolute right-2 top-2 rounded-md border border-gold-main bg-[var(--bg-primary)] px-2 py-0.5 text-xs font-semibold text-gold-main">
+                            AI
+                          </span>
+                        )}
+
+                        {screenCount > 0 && (
+                          <span className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-md bg-[var(--bg-primary)] px-2 py-1 text-xs font-medium text-text-primary">
+                            <Icon name="Image" />
+                            {screenCount} {screenLabel}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* 3. Description: fixed two-line box. Keep the first
+                          description in projects.json to about two lines. */}
+                      <p className="h-12 shrink-0 px-4 pt-2 text-sm leading-5 text-text-secondary">
+                        {project.description}
+                      </p>
+
+                      {/* 4. Tech stack: one fixed row, same chip style as the
+                          Skills section */}
+                      <ul className="flex h-11 shrink-0 flex-nowrap items-center gap-1.5 overflow-hidden px-4 pb-1">
+                        {tags.map((tag) => (
+                          <li
+                            key={tag}
+                            className="shrink-0 whitespace-nowrap rounded-full bg-white/10 px-3 py-1 text-xs"
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Cover: purely visual, never intercepts the mouse, and
+                        appears instantly (no fade). */}
+                    <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-2xl bg-[color-mix(in_srgb,var(--bg-primary)_90%,transparent)] opacity-0 group-hover/card:opacity-100 group-focus-visible/card:opacity-100">
+                      <Button
+                        type="button"
+                        variant="primary"
+                        tabIndex={-1}
+                        className="pointer-events-none bg-[var(--bg-primary)]"
+                      >
+                        <Icon name="Image" />
+                        <span>View screens</span>
                       </Button>
-                    </a>
-                  )}
+
+                      {screenCount > 0 && (
+                        <span className="text-sm text-text-secondary">
+                          {screenCount} {screenLabel} inside
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Surface>
-          ))}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+
+      {selectedProject && (
+        <ProjectViewer project={selectedProject} onClose={closeProjectViewer} />
+      )}
+    </>
   );
 }

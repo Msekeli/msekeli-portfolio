@@ -5,7 +5,6 @@
 @import "./styles/base.css";
 @import "./styles/components.css";
 
-@import "./styles/animations/fade.css";
 @import "./styles/animations/slide.css";
 @import "./styles/animations/scale.css";
 
@@ -23,9 +22,58 @@
   --color-gold-soft: var(--gold-soft);
   --color-gold-deep: var(--gold-deep);
 }
+
+/* Kept so existing components don't break, but intentionally neutral:
+   no GPU layer, no special scaling. */
 .image-render-crisp {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  image-rendering: auto;
+}
+
+/* One section at a time on desktop. Below 768px sections scroll normally. */
+@media (min-width: 768px) {
+  .pager {
+    position: relative;
+    height: calc(100vh - 3.5rem);
+    overflow: hidden;
+  }
+
+  .pager > section {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Leaving: quick fade, then hide. */
+    transition:
+      opacity 0.12s ease,
+      transform 0.12s ease,
+      visibility 0s linear 0.12s;
+  }
+
+  .pager > section[data-pos="before"] {
+    transform: translateY(-14px);
+  }
+
+  .pager > section[data-pos="after"] {
+    transform: translateY(14px);
+  }
+
+  .pager > section[data-pos="active"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    /* Arriving: starts immediately. */
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      visibility 0s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pager > section,
+  .pager > section[data-pos="active"] {
+    transition: none;
+  }
 }

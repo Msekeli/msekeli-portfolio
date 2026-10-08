@@ -1,51 +1,80 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+const DESKTOP_BREAKPOINT = 768;
+const HEADER_HEIGHT = 56;
+// After a nav click on mobile, ignore scroll updates while the page glides
+// to the target, so the highlight doesn't flicker through the sections.
+const CLICK_LOCK_MS = 1200;
 
 export default function useActiveSection(ids) {
-  const [activeId, setActiveId] = useState(ids[0]);
+  const [activeId, setActiveIdState] = useState(ids[0]);
+  const lockedRef = useRef(false);
+  const lockTimerRef = useRef();
 
+  const setActiveId = useCallback((id) => {
+    lockedRef.current = true;
+    setActiveIdState(id);
+
+    clearTimeout(lockTimerRef.current);
+    lockTimerRef.current = setTimeout(() => {
+      lockedRef.current = false;
+    }, CLICK_LOCK_MS);
+  }, []);
+
+  // Mobile only: sections scroll normally there, so the active one follows
+  // the scroll position. On desktop the pager decides the active section.
   useEffect(() => {
-    // Callbacks only report entries whose ratio just crossed a threshold,
-    // not every observed section — so we keep a running record of each
-    // section's last-known ratio and always pick the best across all of
-    // them, instead of only the ones that happened to change this time.
-    const ratios = new Map(ids.map((id) => [id, 0]));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          ratios.set(
-            entry.target.id,
-            entry.isIntersecting ? entry.intersectionRatio : 0,
-          );
-        });
+    if (!sections.length) return;
 
-        let bestId = null;
-        let bestRatio = 0;
+    let frame = 0;
 
-        ratios.forEach((ratio, id) => {
-          if (ratio > bestRatio) {
-            bestRatio = ratio;
-            bestId = id;
-          }
-        });
+    const update = () => {
+      frame = 0;
+      if (window.innerWidth >= DESKTOP_BREAKPOINT) return;
+      if (lockedRef.current) return;
 
-        if (bestId) {
-          setActiveId(bestId);
-        }
-      },
-      {
-        root: document.getElementById("scroll-container"),
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-      },
-    );
+      const probe =
+        window.scrollY +
+        HEADER_HEIGHT +
+        (window.innerHeight - HEADER_HEIGHT) / 2;
 
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+      let current = sections[0].id;
 
-    return () => observer.disconnect();
+      for (const section of sections) {
+        if (section.offsetTop <= probe) current = section.id;
+      }
+
+      setActiveIdState(current);
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    const onScrollEnd = () => {
+      lockedRef.current = false;
+      clearTimeout(lockTimerRef.current);
+      onScroll();
+    };
+
+    update();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scrollend", onScrollEnd);
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scrollend", onScrollEnd);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+      clearTimeout(lockTimerRef.current);
+    };
   }, [ids]);
 
-  return activeId;
+  return [activeId, setActiveId];
 }

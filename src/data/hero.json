@@ -3,5 +3,20 @@
   "name": "Msekeli Mkwibiso",
   "headline": "Software Engineer",
   "description": "I build responsive interfaces and the backend systems behind them, from interactive data visualizations to AI-powered tools. This is where I share what I've built, on my own time, outside of work.",
-  "cta": "View My Work"
+  "cta": "View My Work",
+  "stats": [
+    {
+      "value": 3,
+      "suffix": "+",
+      "label": "Years building software",
+      "shortLabel": "Years"
+    },
+    {
+      "value": 9,
+      "suffix": "+",
+      "label": "Full-stack projects",
+      "shortLabel": "Projects"
+    },
+    { "value": 3, "suffix": "", "label": "Agile teams", "shortLabel": "Teams" }
+  ]
 }

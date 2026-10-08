@@ -1,37 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import Container from "./Container";
+import SectionPagerContext from "../context/SectionPagerContext";
 
-export default function Section({ children, id }) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+export default function Section({ children, id, className = "" }) {
+  const { activeId, ids } = useContext(SectionPagerContext);
 
-  useEffect(() => {
-    const root = document.getElementById("scroll-container");
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { root, threshold: 0.35 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, []);
+  // On desktop only one section shows at a time. Sections before the active
+  // one rest slightly above, sections after it slightly below, and the CSS in
+  // index.css fades them in and out. Below md this is ignored and the
+  // sections scroll normally.
+  const index = ids.indexOf(id);
+  const activeIndex = ids.indexOf(activeId);
+  const position =
+    index === activeIndex ? "active" : index < activeIndex ? "before" : "after";
 
   return (
     <section
-      ref={ref}
       id={id}
-      className={`snap-start py-12 md:min-h-full pt-12 md:pt-8 ${
-        visible ? "animate-fade" : "opacity-0"
-      }`}
+      data-pos={position}
+      className={`scroll-mt-14 py-12 pt-12 md:h-[calc(100vh-3.5rem)] md:pt-8 ${className}`}
     >
-      <Container className="flex flex-col">{children}</Container>
+      <Container className="flex flex-col h-full">{children}</Container>
     </section>
   );
 }

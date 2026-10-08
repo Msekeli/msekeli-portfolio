@@ -2,6 +2,7 @@
   /* ========= COLORS ========= */
   --bg-primary: #0b1220;
   --bg-surface: #121a2e;
+  --bg-elevated: #18223a;
 
   --text-primary: #f5f7fa;
   --text-secondary: #b8c1d9;
@@ -41,4 +42,13 @@
     transparent 1px,
     transparent 2px
   );
+}
+
+:root {
+  /* ========= TYPOGRAPHY ========= */
+
+  --tracking-body: 0.015em;
+  --tracking-heading: 0.02em;
+  --tracking-ui: 0.025em;
+  --tracking-emphasis: 0.04em;
 }

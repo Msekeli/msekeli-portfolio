@@ -12,7 +12,7 @@ export default function About() {
     <Section id="about">
       <SectionTitle>About</SectionTitle>
 
-      <div className="stagger space-y-4">
+      <div className="space-y-4">
         {items.map((item, index) => {
           const open = openIndex === index;
           const panelId = `about-panel-${index}`;
@@ -53,7 +53,7 @@ export default function About() {
                 </button>
 
                 {open && (
-                  <div id={panelId} className="animate-slide-up px-4 pb-4">
+                  <div id={panelId} className="px-4 pb-4">
                     <Text variant="secondary">{item.a}</Text>
                   </div>
                 )}

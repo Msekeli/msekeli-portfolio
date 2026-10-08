@@ -1,7 +1,10 @@
 [
   {
+    "_projectStart": "===== PROJECT START: Interview Prep =====",
+    "id": "interview-prep",
     "title": "Interview Prep",
-    "description": "AI-powered interview preparation platform built with Clean Architecture to simulate realistic job interviews based on a candidate's CV, target role, and company context. Generates tailored interview questions, evaluates responses, provides personalized feedback, tracks performance across interview sessions, and includes automated unit testing for core business logic.",
+    "description": "Voice-enabled AI mock interviews from your CV and job ad, ending in structured feedback.",
+    "frontend": "Next.js",
     "tech": [
       "Next.js",
       "TypeScript",
@@ -10,13 +13,106 @@
       "Azure Speech Services",
       "SQLite"
     ],
-    "demo": "https://www.youtube.com/watch?v=nx9n_ekBwrE",
+    "ai": true,
     "repo": "https://github.com/Msekeli/InterviewPrep.git",
-    "image": "/images/interview-session.svg"
+    "cover": "/images/03-interview-session-active.webp",
+    "screens": [
+      {
+        "title": "Interview setup",
+        "description": "Configure an interview session by providing the candidate's CV, job description, and optional company overview before starting the interview.",
+        "details": [
+          "CV input",
+          "Job description input",
+          "Company overview",
+          "Character limits",
+          "Interview session creation",
+          "Start interview workflow"
+        ],
+        "tech": ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+        "image": "/images/01-interview-setup-cv.webp"
+      },
+      {
+        "title": "Interactive interview session",
+        "description": "Practise realistic interview questions through an interactive interview experience with an AI interviewer, candidate responses, spoken questions, and interview controls.",
+        "details": [
+          "AI interviewer panel",
+          "Candidate panel",
+          "Current question display",
+          "Question progress tracking",
+          "Written answers",
+          "Speech input and output",
+          "Next question workflow"
+        ],
+        "tech": ["Next.js", "TypeScript", "React", "Azure Speech Services"],
+        "image": "/images/03-interview-session-active.webp"
+      },
+      {
+        "title": "AI interview reflection",
+        "description": "Review structured post-interview feedback covering observations, strengths, communication, growth opportunities, overall impression, and the next area to focus on.",
+        "details": [
+          "Interview observation",
+          "Strengths analysis",
+          "Communication feedback",
+          "Growth opportunity",
+          "Overall impression",
+          "Next focus"
+        ],
+        "tech": ["Next.js", "TypeScript", "React", "Gemini API"],
+        "image": "/images/04-interview-reflection.webp"
+      },
+      {
+        "title": "InterviewPrep REST API",
+        "description": "The ASP.NET Core backend exposes documented REST endpoints for creating and managing interview sessions, generating questions, submitting answers, and completing interviews.",
+        "details": [
+          "ASP.NET Core Web API",
+          "Swagger / OpenAPI",
+          "Interview session endpoints",
+          "Question endpoints",
+          "Answer endpoints",
+          "Session completion endpoint",
+          "GET and POST operations"
+        ],
+        "tech": [
+          ".NET 9",
+          "ASP.NET Core",
+          "Entity Framework Core",
+          "SQLite",
+          "Swagger / OpenAPI"
+        ],
+        "image": "/images/05-interview-api-swagger.webp"
+      },
+      {
+        "title": "Project structure",
+        "description": "The repository separates the backend API, application, domain, infrastructure, tests, and Next.js client into a layered full-stack solution following Clean Architecture.",
+        "details": [
+          "InterviewPrep.Api",
+          "InterviewPrep.Application",
+          "InterviewPrep.Domain",
+          "InterviewPrep.Infrastructure",
+          "InterviewPrep.Tests",
+          "interviewprep.client",
+          "Clean Architecture",
+          "GitHub repository structure"
+        ],
+        "tech": [
+          "Clean Architecture",
+          ".NET 9",
+          "ASP.NET Core",
+          "Next.js",
+          "TypeScript"
+        ],
+        "image": "/images/interviewprep-project-structure.webp"
+      }
+    ],
+    "_projectEnd": "===== PROJECT END: Interview Prep ====="
   },
+
   {
+    "_projectStart": "===== PROJECT START: Spaza Stock Manager =====",
+    "id": "spaza-stock-manager",
     "title": "Spaza Stock Manager",
-    "description": "Enterprise-style inventory management system for retail and spaza shops. Built with Clean Architecture, Azure SQL, stored procedures, supplier management, stock tracking, inventory valuation, operational dashboards, and unit-tested business workflows.",
+    "description": "Role-based inventory system for spaza shops: stock, suppliers, transactions, low-stock alerts.",
+    "frontend": "Blazor WASM",
     "tech": [
       "Blazor WebAssembly",
       ".NET 8",
@@ -25,47 +121,537 @@
       "Radzen",
       "Bootstrap"
     ],
-    "demo": "https://www.youtube.com/watch?v=HCuIlkI5fFY",
+    "ai": false,
     "repo": "https://github.com/Msekeli/InventoryLedger.git",
-    "image": "/images/inventory.png"
+    "cover": "/images/spaza-dashboard.webp",
+    "screens": [
+      {
+        "title": "Role-based login",
+        "description": "The application begins with a role-based login screen supporting Owner, Cashier, and Stock Clerk demo users.",
+        "details": [
+          "Owner access",
+          "Cashier access",
+          "Stock Clerk access",
+          "Demo credentials",
+          "Role-based application entry"
+        ],
+        "tech": ["Blazor WASM", ".NET 8", "ASP.NET Core"],
+        "image": "/images/spaza-login.webp"
+      },
+      {
+        "title": "Operational dashboard",
+        "description": "The main inventory dashboard provides an operational overview of stock activity and inventory status for day-to-day retail management.",
+        "details": [
+          "Total inventory items",
+          "Low-stock alerts",
+          "Inventory value",
+          "Stock movement summary",
+          "Recent activity"
+        ],
+        "tech": ["Blazor WASM", "Radzen", ".NET 8"],
+        "image": "/images/spaza-dashboard.webp"
+      },
+      {
+        "title": "Inventory items",
+        "description": "Manage inventory items through a searchable data grid with supplier filtering, stock visibility, pricing, paging, and item maintenance actions.",
+        "details": [
+          "Radzen DataGrid",
+          "Inventory search",
+          "Supplier filtering",
+          "On-hand stock visibility",
+          "Create, edit and delete actions",
+          "Paging"
+        ],
+        "tech": ["Blazor WASM", "Radzen", ".NET 8"],
+        "image": "/images/spaza-items.webp"
+      },
+      {
+        "title": "Stock transactions",
+        "description": "Track inventory movement through recent activity and transaction history with movement type, dates, quantities, references, and notes.",
+        "details": [
+          "Stock IN / OUT tracking",
+          "Movement type filtering",
+          "Date filtering",
+          "Recent activity",
+          "Movement history",
+          "Transaction references"
+        ],
+        "tech": ["Blazor WASM", ".NET 8", "Azure SQL"],
+        "image": "/images/spaza-transactions.webp"
+      },
+      {
+        "title": "Low-stock monitoring",
+        "description": "Monitor products that require replenishment and identify stock gaps using thresholds, severity filtering, and restock actions.",
+        "details": [
+          "Low-stock thresholds",
+          "SKU and product search",
+          "Severity filtering",
+          "Stock gap visibility",
+          "Restock actions"
+        ],
+        "tech": ["Blazor WASM", "Radzen", "Azure SQL"],
+        "image": "/images/spaza-low-stock.webp"
+      },
+      {
+        "title": "Supplier management",
+        "description": "Manage supplier relationships and inventory sources through searchable supplier records with contact, email, and status information.",
+        "details": [
+          "Supplier records",
+          "Supplier contacts",
+          "Email contacts",
+          "Supplier status",
+          "Supplier search",
+          "Add supplier workflow"
+        ],
+        "tech": ["Blazor WASM", "ASP.NET Core", "Radzen"],
+        "image": "/images/spaza-suppliers.webp"
+      },
+      {
+        "title": "Inventory REST API",
+        "description": "The ASP.NET Core backend exposes inventory operations through documented REST endpoints for inventory, items, and stock transactions.",
+        "details": [
+          "ASP.NET Core Web API",
+          "Swagger / OpenAPI",
+          "Inventory endpoints",
+          "Item endpoints",
+          "Stock transaction endpoints",
+          "GET and POST operations"
+        ],
+        "tech": ["ASP.NET Core", "REST API", "Swagger / OpenAPI"],
+        "image": "/images/spaza-api.webp"
+      },
+      {
+        "title": "Project structure",
+        "description": "The repository separates the API, application, client, domain, infrastructure, and test projects into a layered full-stack solution.",
+        "details": [
+          "Inventory.Api",
+          "Inventory.Application",
+          "Inventory.Client",
+          "Inventory.Domain",
+          "Inventory.Infrastructure",
+          "Inventory.Tests",
+          "GitHub repository structure"
+        ],
+        "tech": ["Clean Architecture", "ASP.NET Core", "Entity Framework Core"],
+        "image": "/images/spaza-project-structure.webp"
+      }
+    ],
+    "_projectEnd": "===== PROJECT END: Spaza Stock Manager ====="
   },
+
   {
-    "title": "Authentication System",
-    "description": "Full-stack authentication platform providing secure user registration, login, JWT authentication, refresh token management, role-based authorization, protected routes, and unit-tested authentication workflows. Designed as the foundation for a future reusable identity platform.",
+    "_projectStart": "===== PROJECT START: Simple Store =====",
+    "id": "simple-store",
+    "title": "Simple Store",
+    "description": "Full-stack e-commerce store: React storefront, Node.js API, shopping cart and Swagger docs.",
+    "frontend": "React",
     "tech": [
       "React",
-      ".NET 9",
-      "PostgreSQL",
-      "JWT",
-      "REST API",
-      "Tailwind CSS"
+      "JavaScript",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "Vite",
+      "Tailwind CSS",
+      "Zustand",
+      "React Router",
+      "Swagger / OpenAPI"
     ],
-    "demo": "",
-    "repo": "https://github.com/Msekeli/LoginSystem.git",
-    "image": "/images/login.webp"
+    "ai": false,
+    "repo": "https://github.com/Msekeli/simple-store1.git",
+    "cover": "/images/simple-store-products.webp",
+    "screens": [
+      {
+        "title": "Simple Store repository",
+        "description": "The GitHub repository contains the complete full-stack Simple Store application, separating the React frontend from the Node.js and TypeScript backend.",
+        "details": [
+          "Frontend and backend separation",
+          "Node.js and Express backend",
+          "React and Vite frontend",
+          "Clean layered architecture",
+          "REST API",
+          "GitHub repository"
+        ],
+        "tech": [
+          "GitHub",
+          "React",
+          "JavaScript",
+          "TypeScript",
+          "Node.js",
+          "Express"
+        ],
+        "image": "/images/simple-store-github.webp"
+      },
+      {
+        "title": "Shopping cart",
+        "description": "Manage products added to the cart with quantity controls, item removal, product details, and a dynamically calculated total.",
+        "details": [
+          "Cart management",
+          "Quantity controls",
+          "Remove items",
+          "Cart total",
+          "Global cart state",
+          "Backend cart integration"
+        ],
+        "tech": ["React", "JavaScript", "Zustand", "Tailwind CSS", "REST API"],
+        "image": "/images/simple-store-cart.webp"
+      },
+      {
+        "title": "Product catalogue",
+        "description": "Browse available products loaded from the backend API, with product images, descriptions, prices, and add-to-cart actions.",
+        "details": [
+          "Product grid",
+          "Product cards",
+          "Product images",
+          "Product pricing",
+          "Add-to-cart workflow",
+          "Responsive layout"
+        ],
+        "tech": ["React", "JavaScript", "Tailwind CSS", "Vite", "REST API"],
+        "image": "/images/simple-store-products.webp"
+      },
+      {
+        "title": "Simple Store API",
+        "description": "Interactive Swagger documentation for the Node.js and Express REST API, providing endpoints for products and shopping cart operations.",
+        "details": [
+          "Product endpoints",
+          "Cart endpoints",
+          "Interactive API testing",
+          "OpenAPI 3.0",
+          "Request schemas",
+          "API responses"
+        ],
+        "tech": ["Node.js", "Express", "TypeScript", "Swagger UI", "OpenAPI"],
+        "image": "/images/simple-store-api-swagger.webp"
+      }
+    ],
+    "_projectEnd": "===== PROJECT END: Simple Store ====="
   },
+
   {
+    "_projectStart": "===== PROJECT START: SmartWheel =====",
+    "id": "smartwheel",
     "title": "SmartWheel",
-    "description": "Gamified rewards platform where users solve riddles to earn spins and win prizes. Features backend-controlled prize allocation, reward tracking, balance management, cooldown enforcement, Clean Architecture, and unit-tested business rules.",
-    "tech": ["React", ".NET 9", "SQLite", "Azure", "Tailwind CSS", "Vite"],
-    "demo": "https://www.youtube.com/watch?v=LSizr1bpCD8",
-    "repo": "https://github.com/Msekeli/SmartWheel2",
-    "image": "/images/smartwheel.webp"
+    "description": "Five riddles decide your prize on a reward wheel, with server-side scoring and daily cooldown.",
+    "frontend": "React + Vite",
+    "tech": [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      ".NET 9",
+      "ASP.NET Core Minimal API",
+      "Entity Framework Core",
+      "SQLite",
+      "Azure App Service"
+    ],
+    "ai": false,
+    "repo": "https://github.com/Msekeli/SmartWheel2.git",
+    "cover": "/images/smartwheel-wheel.webp",
+    "screens": [
+      {
+        "title": "SmartWheel",
+        "description": "The main SmartWheel screen introduces the reward wheel and lets the user start the game by selecting Spin the Wheel.",
+        "details": [
+          "Prize wheel",
+          "Reward segments",
+          "Spin interaction",
+          "Game interface",
+          "Prize display"
+        ],
+        "tech": ["React", "Vite", "Tailwind CSS"],
+        "image": "/images/smartwheel-wheel.webp"
+      },
+      {
+        "title": "Player identity",
+        "description": "When the user starts the game, they are asked to enter their email address so the application can identify or create their player account.",
+        "details": [
+          "Email input",
+          "Player identification",
+          "User creation",
+          "Game entry",
+          "Spin eligibility"
+        ],
+        "tech": ["React", ".NET 9", "ASP.NET Core", "Entity Framework Core"],
+        "image": "/images/smartwheel-identity.webp"
+      },
+      {
+        "title": "Riddle challenge",
+        "description": "After entering their identity, the user completes five riddles. Their answers are submitted to the backend and used to calculate their score.",
+        "details": [
+          "Five riddles",
+          "Multiple-choice answers",
+          "Question progress",
+          "Answer selection",
+          "Score calculation"
+        ],
+        "tech": ["React", "Vite", "Tailwind CSS", ".NET 9"],
+        "image": "/images/smartwheel-riddle.webp"
+      },
+      {
+        "title": "Spin result",
+        "description": "Once the riddle challenge is completed, the backend uses the user's score to determine the prize and the exact wheel segment where the wheel should stop.",
+        "details": [
+          "Score-based prize",
+          "Wheel index",
+          "Prize result",
+          "Balance update",
+          "Spin history"
+        ],
+        "tech": [
+          ".NET 9",
+          "ASP.NET Core",
+          "Entity Framework Core",
+          "SQLite",
+          "React"
+        ],
+        "image": "/images/smartwheel-result.webp"
+      },
+      {
+        "title": "Daily spin restriction",
+        "description": "After receiving a reward, attempting to play again before the 24-hour cooldown has passed is blocked and the user is asked to return the following day.",
+        "details": [
+          "24-hour cooldown",
+          "Spin eligibility",
+          "Business rule enforcement",
+          "User feedback",
+          "Balance protection"
+        ],
+        "tech": ["React", ".NET 9", "ASP.NET Core", "SQLite"],
+        "image": "/images/smartwheel-cooldown.webp"
+      },
+      {
+        "title": "SmartWheel REST API",
+        "description": "The ASP.NET Core backend exposes documented endpoints for resolving player identity, processing spins, checking player status, and providing the application's API contract.",
+        "details": [
+          "Identity endpoint",
+          "Spin endpoint",
+          "Status endpoint",
+          "OpenAPI documentation",
+          "Request schemas",
+          "API responses"
+        ],
+        "tech": [".NET 9", "ASP.NET Core", "Swagger / OpenAPI"],
+        "image": "/images/smartwheel-api-swagger.webp"
+      },
+      {
+        "title": "SmartWheel repository",
+        "description": "The GitHub repository contains the complete full-stack solution, separating the API, application logic, infrastructure, and React client into a layered architecture.",
+        "details": [
+          "SmartWheel.Api",
+          "SmartWheel.Application",
+          "SmartWheel.Infrastructure",
+          "SmartWheel.Client",
+          "SQLite persistence",
+          "GitHub Actions"
+        ],
+        "tech": [
+          "C#",
+          ".NET 9",
+          "React",
+          "Entity Framework Core",
+          "SQLite",
+          "Azure App Service"
+        ],
+        "image": "/images/smartwheel-github.webp"
+      }
+    ],
+    "_projectEnd": "===== PROJECT END: SmartWheel ====="
   },
+
   {
+    "_projectStart": "===== PROJECT START: EventReserve =====",
+    "id": "event-reserve",
     "title": "EventReserve",
-    "description": "Event reservation platform that allows users to create, manage, and track event bookings through a responsive React frontend and ASP.NET Core API. Features reservation management, event scheduling, validation, and RESTful API integration.",
+    "description": "Create events, manage reservations and track bookings with a responsive React and .NET app.",
+    "frontend": "React",
     "tech": ["React", ".NET 9", "Tailwind CSS", "REST API"],
-    "demo": "https://www.youtube.com/watch?v=aGux4z_jVuA",
+    "ai": false,
     "repo": "https://github.com/Msekeli/EventReserve.git",
-    "image": "/images/event.webp"
+    "cover": "/images/event.webp",
+    "screens": [
+      {
+        "title": "Event management",
+        "description": "Create and manage events through the platform's responsive event management workflow.",
+        "tech": ["React", ".NET 9", "Tailwind CSS"],
+        "image": "/images/event.webp"
+      },
+      {
+        "title": "Reservations",
+        "description": "Users can create and manage reservations associated with scheduled events.",
+        "tech": ["React", ".NET 9", "REST API"],
+        "image": "/images/event.webp"
+      },
+      {
+        "title": "Booking management",
+        "description": "Reservation information can be tracked and managed through the application's booking workflow.",
+        "tech": ["React", "Tailwind CSS", "REST API"],
+        "image": "/images/event.webp"
+      },
+      {
+        "title": "Validation",
+        "description": "Validation helps keep event and reservation information consistent throughout the booking process.",
+        "tech": [".NET 9", "REST API", "React"],
+        "image": "/images/event.webp"
+      },
+      {
+        "title": "API integration",
+        "description": "The React frontend communicates with the ASP.NET Core API through the application's RESTful integration.",
+        "tech": ["React", ".NET 9", "REST API"],
+        "image": "/images/event.webp"
+      }
+    ],
+    "_projectEnd": "===== PROJECT END: EventReserve ====="
   },
+
   {
+    "_projectStart": "===== PROJECT START: Course Enrollment App =====",
+    "id": "course-enrollment-app",
     "title": "Course Enrollment App",
-    "description": "Full-stack course enrollment platform featuring JWT authentication, course management, enrollment workflows, and a Clean Architecture approach using Blazor and ASP.NET Core.",
-    "tech": ["Blazor WebAssembly", ".NET", "Entity Framework Core", "JWT"],
-    "demo": "",
+    "description": "Course platform: register, log in with JWT, browse courses and manage your own course list.",
+    "frontend": "Blazor WebAssembly",
+    "tech": [
+      "Blazor WebAssembly",
+      ".NET 8",
+      "C#",
+      "ASP.NET Core Web API",
+      "Entity Framework Core",
+      "JWT Authentication",
+      "Bootstrap",
+      "Bootstrap Icons",
+      "Swagger / OpenAPI",
+      "InMemory Database"
+    ],
+    "ai": false,
     "repo": "https://github.com/Msekeli/CourseEnrollmentApp.git",
-    "image": "/images/enrol.webp"
+    "cover": "/images/01-course-enrollment-home.webp",
+    "screens": [
+      {
+        "title": "Course Enrollment landing page",
+        "description": "The public landing page introduces the Makufundwe course platform and provides entry points for browsing courses or creating an account.",
+        "details": [
+          "Makufundwe branding",
+          "Course discovery",
+          "Browse Courses action",
+          "Create Account action",
+          "Public navigation"
+        ],
+        "tech": [
+          "Blazor WebAssembly",
+          "Razor Components",
+          "Bootstrap",
+          "Bootstrap Icons"
+        ],
+        "image": "/images/01-course-enrollment-home.webp"
+      },
+      {
+        "title": "Create account",
+        "description": "New users create a student account by providing their name, email address, and password before accessing the course platform.",
+        "details": [
+          "Student registration",
+          "Name and email input",
+          "Password input",
+          "Form validation",
+          "Registration API"
+        ],
+        "tech": [
+          "Blazor WebAssembly",
+          "ASP.NET Core Web API",
+          "C#",
+          "Bootstrap"
+        ],
+        "image": "/images/03-course-enrollment-register.webp"
+      },
+      {
+        "title": "User login",
+        "description": "Registered users authenticate through the ASP.NET Core API before accessing the protected course functionality.",
+        "details": [
+          "Email authentication",
+          "Password authentication",
+          "Form validation",
+          "JWT authentication",
+          "Protected application access"
+        ],
+        "tech": [
+          "Blazor WebAssembly",
+          "ASP.NET Core Web API",
+          "JWT Authentication",
+          "C#"
+        ],
+        "image": "/images/02-course-enrollment-login.webp"
+      },
+      {
+        "title": "Available Courses",
+        "description": "Authenticated users browse the course catalogue, search for courses, and add courses to their personal learning list.",
+        "details": [
+          "Course catalogue",
+          "Course search",
+          "Course categories",
+          "Add Course workflow",
+          "API-driven course data"
+        ],
+        "tech": [
+          "Blazor WebAssembly",
+          "ASP.NET Core Web API",
+          "Bootstrap",
+          "C#"
+        ],
+        "image": "/images/06-course-enrollment-available-courses.webp"
+      },
+      {
+        "title": "My Courses",
+        "description": "Courses selected from the available catalogue are displayed in the user's personal course area.",
+        "details": [
+          "Selected course listing",
+          "Course search",
+          "Course categories",
+          "View Course action",
+          "Remove Course action"
+        ],
+        "tech": ["Blazor WebAssembly", "Bootstrap", "Bootstrap Icons", "C#"],
+        "image": "/images/05-course-enrollment-my-courses.webp"
+      },
+      {
+        "title": "Course Enrollment REST API",
+        "description": "Swagger provides interactive documentation for the backend API supporting authentication, courses, students, and enrollment operations.",
+        "details": [
+          "Authentication endpoints",
+          "Course and student endpoints",
+          "Enrollment operations",
+          "JWT Bearer authorization",
+          "GET, POST and DELETE operations",
+          "OpenAPI documentation"
+        ],
+        "tech": [
+          ".NET 8",
+          "ASP.NET Core Web API",
+          "Entity Framework Core",
+          "JWT Authentication",
+          "Swagger / OpenAPI"
+        ],
+        "image": "/images/04-course-enrollment-api-swagger.webp"
+      },
+      {
+        "title": "Course Enrollment App repository",
+        "description": "The GitHub repository separates the Blazor client, API, application logic, domain model, and infrastructure into a layered Clean Architecture solution.",
+        "details": [
+          "API project",
+          "Blazor WebAssembly client",
+          "Application and Domain layers",
+          "Infrastructure layer",
+          "Repository and service patterns",
+          "Clean Architecture"
+        ],
+        "tech": [
+          "C#",
+          ".NET 8",
+          "Blazor WebAssembly",
+          "ASP.NET Core",
+          "Entity Framework Core",
+          "Clean Architecture"
+        ],
+        "image": "/images/07-course-enrollment-project-structure.webp"
+      }
+    ],
+    "_projectEnd": "===== PROJECT END: Course Enrollment App ====="
   }
 ]
